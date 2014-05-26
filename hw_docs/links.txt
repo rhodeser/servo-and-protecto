@@ -1,0 +1,11 @@
+IR, sonar robot demo:
+https://www.youtube.com/watch?v=f8ZBd4TpMBg
+Website:
+http://letsmakerobots.com/node/40502
+
+Similar implementation:
+https://www.youtube.com/watch?v=zjCoQ5W0wE0
+
+Product description/order of C87:
+http://www.dx.com/p/arduino-compatible-bluetooth-controlled-robot-car-kits-146418#tabProInfo
+

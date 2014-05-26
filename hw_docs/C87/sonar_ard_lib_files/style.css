@@ -1,0 +1,740 @@
+/*
+Theme Name:     ITead iMall
+Theme URI:      http://imall.iteadstudio.com/
+Description:    WordPress theme mimics the magento theme of ITead iMall
+Author:         dev@magentocollection.com
+Author URI:     http://www.magentocollection.com/
+Template:       twentyeleven
+Version:        0.1.0
+*/
+
+@import url('../twentyeleven/style.css');
+
+body {
+    padding: 0;
+    background-color: #E6EDEE;
+}
+p {
+    margin-bottom: 1em;
+}
+#page {
+    margin: 0;
+    max-width: 100%;
+    background-color: #E6EDEE;
+    color: #2F2F2F;
+    font: 12px/1.55 Droid Sans, Arial, Helvetica, sans-serif;
+}
+#nav, #main, #colophon {
+    width: 955px;
+    margin: 0 auto;
+}
+#header {
+    height: 99px;
+    width: 950px;
+    margin: 0 auto;
+}
+
+#branding {
+    border-top-width: 0;
+    padding: 10px 10px 0;
+}
+#branding hgroup {
+    margin: 0;
+    float: left;
+}
+#site-title {
+    margin: 0;
+    padding: 0;
+    width: 353px;
+    text-align: right;
+}
+#site-title a {
+    display: block;
+    margin-top: 3px;
+}
+#branding img {
+    width: 353px;
+    height: 76px;
+}
+
+.quick-access {
+    float: right;
+    width: 500px;
+    padding: 0px 10px 0 0;
+}
+
+div.livesupport {
+    float: right;
+    margin-left: 2em;
+    padding-top: 10px;
+}
+div.livesupport div {
+    display: inline-block;
+    border: 0;
+    height: 30px;
+    background: url('http://imall.iteadstudio.com/skin/frontend/em0006/default/images/btn_search.gif') 0 0 no-repeat;
+    padding: 0 0 0 3px;
+}
+div.livesupport div div {
+    background-position: 100% 0;
+    padding: 5px 6px 0 3px;
+}
+div.livesupport div div a {
+    font: bold 11px/21px Droid Sans, Tahoma, Verdana, Arial, sans-serif;
+    text-decoration: none;
+    color: #D2EEFF;
+}
+
+#search_mini_form .form-search {
+    float: right;
+    height: 30px;
+    padding: 10px 0 10px 16px;
+    right: 0;
+    top: 0;
+    position: relative;
+}
+#search_mini_form .form-search label {
+    display: none;
+}
+#search_mini_form .form-search input.input-text {
+    float: left;
+    background: url('http://imall.iteadstudio.com/skin/frontend/em0006/default/images/bg_input_search.jpg') no-repeat scroll 0 0;
+    border: medium none;
+    color: #333;
+    font-style: italic;
+    height: 25px;
+    line-height: 25px;
+    padding: 2px 0 2px 25px;
+    width: 175px;
+    font-size: 12px;
+    vertical-align: middle;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+#search_mini_form button.button {
+    float: left;
+    overflow: visible;
+    width: auto;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    cursor: pointer;
+}
+#search_mini_form button.button span {
+    display: block;
+    border: 0;
+    height: 30px;
+    background: url('http://imall.iteadstudio.com/skin/frontend/em0006/default/images/btn_search.gif') 0 0 no-repeat;
+    padding: 0 0 0 3px;
+    font: bold 11px/21px Droid Sans, Tahoma, Verdana, Arial, sans-serif;
+    text-align: center;
+    white-space: nowrap;
+}
+#search_mini_form button.button span span {
+    background-position: 100% 0;
+    padding: 5px 6px 0 3px;
+    text-transform: uppercase;
+    color: #D2EEFF;
+}
+
+.quick-access .links {
+    list-style: none;
+    float: right;
+    margin: 55px 0 0 6px;
+    text-align: right;
+    width: 100%;
+}
+.quick-access .links li {
+    display: inline;
+    font-size: 11px;
+    background: url('http://imall.iteadstudio.com/skin/frontend/em0006/default/images/bkg_pipe1.gif') left 4px no-repeat;
+    padding: 0 8px 0 8px;
+}
+.quick-access .links li.last {
+    padding-right: 0;
+}
+.quick-access .links a {
+    color: #333;
+    font-size: 12px;
+    text-decoration: none;
+}
+.quick-access .links a:hover {
+    text-decoration: underline;
+}
+
+.nav-container {
+    background: #0A263D url('http://imall.iteadstudio.com/skin/frontend/em0006/default/images/bkg_nav0.jpg') 50% 0 repeat-x;
+    height: 53px;
+}
+#nav {
+    list-style: none;
+    width: 955px;
+    margin: 0 auto;
+    font-size: 13px;
+}
+#nav li {
+    float: left;
+    position: relative;
+    text-align: left;
+}
+#nav a {
+    float: left;
+    padding: 0px;
+    color: #A7C6DD;
+    font-weight: bold;
+    margin-top: -1px;
+    display: block;
+    line-height: 1.3em;
+    text-decoration: none;
+}
+#nav a:hover {
+    background:url('http://imall.iteadstudio.com/skin/frontend/em0006/default/images/bg_menu.gif') left 0 no-repeat;
+    background-position:100% 0;
+}
+#nav span {
+    display: block;
+    cursor: pointer;
+    white-space: nowrap;
+    color: #D2EEFF;
+    height: 40px;
+    border: 0;
+    font: 12px/30px Droid Serif,verdana, Arial, sans-serif;
+    background-position: 100% 0;
+    padding: 12px 12px 0 13px;
+}
+#nav a:hover span {
+    background:url('http://imall.iteadstudio.com/skin/frontend/em0006/default/images/bg_menu.gif') no-repeat scroll 0 0 transparent;
+}
+
+.footcol {
+    clear: both;
+    background: url('http://imall.iteadstudio.com/skin/frontend/em0006/default/images/horizontal.gif') no-repeat left top;
+}
+.footcol ul {
+    list-style: none;
+    padding: 25px 0 0 0;
+    margin: 0;
+}
+.footcol ul li {
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 31px;
+    height: 31px;
+    padding: 0 10px 0 2px;
+    float: left;
+    margin-right: 13px;
+}
+.footcol ul li a {
+    color: black;
+    text-decoration: none;
+    padding-left: 30px;
+    font-size: 12px;
+    font-weight: normal;
+}
+.footcol ul li.facebook {
+    background: url('http://imall.iteadstudio.com/skin/frontend/em0006/default/images/join.png') no-repeat 0 1px;
+}
+.footcol ul li.twitter {
+    background: url('http://imall.iteadstudio.com/skin/frontend/em0006/default/images/join.png') no-repeat 0 -57px;
+}
+.footcol ul li.google {
+    background: url('http://imall.iteadstudio.com/skin/frontend/em0006/default/images/google.png') no-repeat 0 -1px;
+}
+.footcol ul li.forum {
+    background: url('http://imall.iteadstudio.com/skin/frontend/em0006/default/images/join.png') no-repeat 0 -173px;
+}
+.footcol ul li.blog {
+    background: url('http://imall.iteadstudio.com/skin/frontend/em0006/default/images/join.png') no-repeat 0 -231px;
+}
+#newsletter-validate-detail {
+    float: right;
+    margin-right: 0;
+    margin: -11px 0 10px;
+    position: relative;
+}
+#newsletter-validate-detail ul li {
+    list-style: none;
+    text-align: right;
+    font-size: 11px;
+    line-height: 25px;
+}
+#newsletter-validate-detail label {
+    color: #333;
+    line-height: 25px;
+    padding-left: 5px;
+}
+#newsletter {
+    background: url('http://imall.iteadstudio.com/skin/frontend/em0006/default/images/bg_newsletter.gif') no-repeat left top;
+    border: medium none;
+    color: #333;
+    float: left;
+    font-style: italic;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 25px;
+    padding-right: 0;
+    width: 161px;
+    font: 12px/15px Droid Sans, Helvetica, sans-serif;
+    vertical-align: middle;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+#newsletter-validate-detail ul li button {
+    position: absolute;
+    right: 5px;
+    top: 25px;
+    overflow: visible;
+    width: auto;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    cursor: pointer;
+}
+#newsletter-validate-detail ul li button.button span {
+    display: block;
+    background: url('http://imall.iteadstudio.com/skin/frontend/em0006/default/images/btn_search.gif') no-repeat 0 0;
+    border: 0 none;
+    font-family: 'Droid Sans', Verdana, Arial,sans-serif;
+    font-size: 11px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    height: 30px;
+    line-height: 21px;
+    padding: 0 0 0 3px;
+}
+#newsletter-validate-detail ul li button.button span span {
+    background-position: 100% 0;
+    padding: 0 6px 0 3px;
+    line-height: 30px;
+    text-transform: uppercase;
+    color: #D2EEFF;
+}
+
+.footer {
+    clear: both;
+    background: url('http://imall.iteadstudio.com/skin/frontend/em0006/default/images/horizontal.gif') no-repeat 0 0;
+    padding: 10px 0 50px;
+}
+.footer .col-left {
+    float: left;
+    padding: 0 0 0 10px;
+    width: 640px;
+}
+.footer .foottable {
+    width: 670px;
+    height: 107px;
+    margin-top: 15px;
+}
+.footer .foottable tr {
+    width: 645px;
+}
+.footer .col-right {
+    width: 300px;
+    float: right;
+    text-align: right;
+}
+.footer .foottable th {
+    font-weight: bold;
+    vertical-align: top;
+    text-align: left;
+}
+.foottable td {
+    color: #889B9C;
+    vertical-align: top;
+    text-align: left;
+    font-weight: normal;
+}
+.footer a {
+    color: #889B9C;
+    text-decoration: none;
+}
+.footer a:hover {
+    color: #000;
+}
+.partnersout {
+    clear: both;
+    background: url('http://imall.iteadstudio.com/skin/frontend/em0006/default/images/horizontal.gif') no-repeat 160px 0;
+    margin: -40px 0 0 0;
+}
+.partnersout .partnersin {
+    height: 20px;
+    line-height: 20px;
+}
+.partnersout .partnersin p {
+    color: #989898;
+}
+.partnersout .partnersin span {
+    font-weight: bold;
+    color: black;
+}
+.partnersout .partnersin a {
+    color: #989898;
+    text-decoration: none;
+}
+.partnersout .copyright {
+    text-align: center;
+    color: #989898;
+    padding: 8px 0 20px 0;
+    background: url('http://imall.iteadstudio.com/skin/frontend/em0006/default/images/horizontal.gif') no-repeat 160px 0;
+}
+
+ul.fixed-tabs {
+    list-style-type: none;
+}
+ul.fixed-tabs a {
+    position: fixed;
+    display: block;
+    width: 18px;
+    height: 86px;
+    right: 0;
+    border-width: 0;
+    text-indent: 999em;
+    background: transparent url('images/fixed-tabs.png') no-repeat; 
+    z-index: 10px;
+}
+ul.fixed-tabs li.tab-new a {
+    top: 252px;
+    background-position: 0 0;
+}
+ul.fixed-tabs li.tab-new a:hover {
+    z-index: 100;
+    background-position: -18px 0;
+}
+ul.fixed-tabs li.tab-blog a {
+    top: 332px;
+    background-position: -54px 0;
+    z-index: 50;
+}
+/*ul.fixed-tabs li.tab-blog a:hover {
+      z-index: 100;
+      background-position: -54px 0;
+}*/
+ul.fixed-tabs li.tab-forum a {
+    top: 412px;
+    background-position: -72px 0;
+}
+ul.fixed-tabs li.tab-forum a:hover {
+    z-index: 100;
+    background-position: -90px 0;
+}
+ul.fixed-tabs li.tab-imall a {
+    top: 492px;
+    background-position: -108px 0;
+}
+ul.fixed-tabs li.tab-imall a:hover {
+    z-index: 100;
+    background-position: -126px 0;
+}
+
+#main {
+    background-color: white;
+    border-radius: 5px;
+    margin: 20px auto;
+}
+#main:after {
+    content: '.';
+    clear: both;
+    height: 0;
+    visibility: hidden;
+    display: block;
+}
+#secondary {
+    margin-right: 20px;
+    padding: 0;
+    width: 220px;
+}
+#primary {
+    margin: 0;
+    padding: 0 0 1px 2px;
+    width: 704px;
+}
+.singular #primary {
+    width: 953px;
+}
+#content, .singular #content {
+    margin: 0 0 0 4em;
+    width: 90%;
+}
+.widget {
+    background: #F8F7F5 url('images/bkg_block-bottom.gif') no-repeat left bottom;
+    padding: 0 5px 5px 20px;
+}
+.widget-title {
+    padding-left: 20px;
+    background: url('images/bkg_block-layered-title-cart.gif') no-repeat 0 0;
+    height: 35px;
+    color: white;
+    font-size: 12px;
+    padding-top: 5px;
+    font-family: 'Droid serif', Arial;
+    margin: 0 -5px 5px -20px;
+}
+.widget ul {
+    list-style: none;
+}
+.widget ul li {
+    padding: 4px 0;
+    line-height: 1.2em;
+}
+.entry-title, .singular .entry-title {
+    font-size: 20px;
+    font-family: 'Droid serif', Arial;
+    line-height: 1.5em;
+    padding-right: 120px;
+}
+.singular .hentry {
+    padding: 0 0 1.625em;
+}
+.singular .entry-header, .singular .entry-content, .singular footer.entry-meta, .singular #comments {
+    margin: 0 0 0 4em;
+    width: 90%;
+}
+.singular #comments-title {
+    margin: 0;
+    color: #333;
+}
+.entry-meta {
+    font-style: italic;
+}
+#respond {
+    background-color: white;
+    margin: 0 0 2em 0;
+    width: 78.9%;
+}
+#reply-title {
+    font-style: italic;
+    font-variant: small-caps;
+    margin: 10px 0;
+    padding-left: 26px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #5F6A72;
+    background: transparent url('images/comments.png') 0 -36px no-repeat;
+    line-height: 20px;
+    font-family: 'Droid Sans';
+}
+#respond .comment-form-author label, #respond .comment-form-email label, #respond .comment-form-url label, #respond .comment-form-comment label {
+    position: absolute;
+    background-color: white;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    left: 47%;
+    top: 0px;
+    line-height: 12px;
+}
+#respond .comment-form-comment label {
+    display: none;
+}
+#respond .comment-form-author .required, #respond .comment-form-email .required {
+    font-size: 14px;
+    top: 0;
+    left: 55%;
+}
+#respond input[type="text"] {
+    width: 45%;
+    padding: 3px;
+    left: 0;
+    background: white url('images/input_bg.png') repeat-x;
+    margin: 3px 0;
+    border-radius: 5px;
+    border: 1px solid #889194;
+    height: 13px;
+    font-size: 12px;
+    color: #444;
+    text-indent: 0;
+}
+#respond textarea {
+    padding: 3px;
+    left: 0;
+    background: white url('images/input_bg.png') repeat-x;
+    margin: 3px 0;
+    border-radius: 5px;
+    border: 1px solid #889194;
+    font-size: 12px;
+    color: #444;
+    text-indent: 0;
+}
+#respond .form-submit {
+    float: none;
+    margin: 0;
+}
+#respond input#submit {
+    left: 0;
+    overflow: hidden;
+    background: transparent url('images/submit.png') 0 0 no-repeat;
+    border: none;
+    outline: none;
+    margin: 5px 0;
+    width: 130px;
+    height: 24px;
+    color: #D7D7D7;
+    line-height: 24px;
+    font-size: 0px;
+    text-shadow: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+}
+#respond input#submit:hover {
+    background-position: 0 -24px;
+}
+.comments-link {
+    display: none;
+}
+.mc-date {
+    position: absolute;
+    top: 2em;
+    right: 0;
+}
+.mc-comment:after, .mc-cate:after {
+    content: ', ';
+}
+.mc-date a, .mc-comment a, .mc-cate a, .author, .author a, .entry-meta .edit-link a {
+    color: #777;
+    font-weight: normal;
+    font-style: normal;
+}
+.widget a {
+    color: #444;
+    font-weight: normal;
+}
+.entry-meta .edit-link a {
+    float: none;
+    padding: 0 2px;
+    margin: 0 2px;
+    background: white;
+}
+.singular .entry-meta .edit-link a {
+    position: static;
+}
+.entry-meta .edit-link a:before {
+    content: '[';
+}
+.entry-meta .edit-link a:after {
+    content: ']';
+}
+.more-link, .mc-top a {
+    float: right;
+    display: block;
+    overflow: hidden;
+    height: 13px;
+    line-height: 13px;
+    font-size: 9px;
+    text-indent: 99em;
+    background: transparent url('images/navlib.png') no-repeat;
+}
+.more-link {
+    margin: 2px 0 0;
+    padding: 1px;
+    width: 37px;
+    background-position: 0 -75px;
+}
+.more-link:hover {
+    background-position: 0 -90px;
+}
+.singular .entry-header .entry-meta {
+    position: static;
+}
+.mc-top a {
+    margin: 9px 0;
+    width: 31px;
+    background-position: 0 -105px;
+}
+.mc-top a:hover {
+    background-position: 0 -118px;
+}
+#content nav {
+    margin: 0 0 1em 4em;
+    width: 90%;
+    padding: 0 0 4px;
+    float: none;
+    border-bottom: 3px double #EBEDED;
+}
+.singular #content .nav-previous a, #content .nav-next a {
+    color: #999;
+    line-height: 20px;
+    display: block;
+    font-weight: normal;
+    background: transparent url('images/navlib.png') no-repeat;
+}
+.singular #content .nav-previous a {
+    padding-left: 20px;
+    background-position: 0 -32px;
+}
+.singular #content .nav-next a {
+    padding-right: 20px;
+    background-position: right -55px;
+}
+.singular #comments-title {
+    font-style: italic;
+    font-variant: small-caps;
+    margin: 10px 0;
+    padding-left: 26px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #5F6A72;
+    background: none;
+    margin: 1em 0;
+    padding: 0;
+    text-transform: none;
+}
+.hentry {
+    border-bottom: 3px double #DDD;
+}
+#nav-above, #content nav #nav-above, .paged #nav-above {
+    display: none;
+}
+#nav-below, #content nav #nav-below, .paged #nav-below {
+    border-bottom: none !important;
+    text-align: center !important;
+    margin: 0 0 1em 0  !important;
+    width: 100%  !important;
+}
+.wp-pagenavi .pages {
+    display: none;
+}
+.wp-pagenavi a, .wp-pagenavi span {
+    display: inline-block;
+    overflow: hidden;
+    margin: 0 3px;
+    width: 12px;
+    height: 12px;
+    font-size: 12px;
+    line-height: 2.2em;
+    text-indent: 99em;
+    background: transparent url('images/navlib.png') -24px 0 no-repeat;
+}
+.wp-pagenavi a:hover, .wp-pagenavi span:hover {
+    background-position:-36px -12px;
+}
+.wp-pagenavi .current {
+    background-position: -24px -12px;
+}
+.wp-pagenavi a.previouspostslink {
+    background-position: 0 0;
+    margin: 0 10px 0 0;
+}
+.wp-pagenavi a.previouspostslink:hover {
+    background-position: 0 -12px;
+}
+.wp-pagenavi a.nextpostslink {
+    background-position: -12px 0;
+    margin: 0 0 0 10px;
+}
+.wp-pagenavi a.nextpostslink:hover {
+    background-position: -12px -12px;
+}
+.widget_search form {
+    margin: 0 0 5px 0;
+}
+.widget-area .textwidget a.rss-feed {
+    display: block;
+    padding: 4px 0 4px 30px;
+    background: url('images/icon-rss.png') no-repeat;
+}

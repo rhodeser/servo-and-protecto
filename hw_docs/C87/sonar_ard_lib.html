@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<!-- saved from url=(0082)http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/ -->
+<html dir="ltr" lang="en-US"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>Arduino Library For Ultrasonic Ranging Module HC-SR04 | ITead Intelligent Systems Blog</title>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="stylesheet" type="text/css" media="all" href="./sonar_ard_lib_files/style.css">
+<link rel="pingback" href="http://blog.iteadstudio.com/xmlrpc.php">
+    <link href="./sonar_ard_lib_files/css" rel="stylesheet" type="text/css">
+    <link href="./sonar_ard_lib_files/css(1)" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="http://blog.iteadstudio.com/wp-content/themes/twentyeleven/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<link rel="alternate" type="application/rss+xml" title="ITead Intelligent Systems Blog » Feed" href="http://blog.iteadstudio.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="ITead Intelligent Systems Blog » Comments Feed" href="http://blog.iteadstudio.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="ITead Intelligent Systems Blog » Arduino Library For Ultrasonic Ranging Module HC-SR04 Comments Feed" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/feed/">
+<link rel="stylesheet" id="comfeed-css" href="./sonar_ard_lib_files/comfeed.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-downloadmanager-css" href="./sonar_ard_lib_files/download-css.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-syntax-css-css" href="./sonar_ard_lib_files/wp-syntax.css" type="text/css" media="all">
+<script type="text/javascript" async="" src="./sonar_ard_lib_files/recipe.js"></script><script type="text/javascript" async="" src="./sonar_ard_lib_files/ga.js"></script><script type="text/javascript" src="./sonar_ard_lib_files/comment-reply.js"></script><style type="text/css"></style>
+<script type="text/javascript">
+/* <![CDATA[ */
+var SHRSB_Globals = {"src":"http:\/\/blog.iteadstudio.com\/wp-content\/plugins\/shareaholic\/spritegen_default","perfoption":"1","twitter_template":"%24%7Btitle%7D+-+%24%7Bshort_link%7D+via+%40Shareaholic","locale":"0","shortener":"google","shortener_key":"","pubGaSocial":"1","pubGaKey":"UA-12350753-7"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./sonar_ard_lib_files/jquery.shareaholic-publishers-sb.min.js"></script><script src="./sonar_ard_lib_files/jquery.min.js" type="text/javascript"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://blog.iteadstudio.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://blog.iteadstudio.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="2.4G Wireless Module : nRF24L01 Module" href="http://blog.iteadstudio.com/2-4g-wireless-module-nrf24l01-module/">
+<link rel="next" title="Breakout board for SMD ICs" href="http://blog.iteadstudio.com/breakout-board-for-smd-ics/">
+<meta name="generator" content="WordPress 3.4.2">
+<link rel="canonical" href="./sonar_ard_lib_files/sonar_ard_lib.html">
+<link rel="shortlink" href="http://blog.iteadstudio.com/?p=137">
+
+
+<!-- Shareaholic Notice: OgTags disabled for all posts -->
+
+<script src="./sonar_ard_lib_files/tagcanvas.js" type="text/javascript"></script>
+
+
+	<script type="text/javascript">	var tcolor='#000fff';	var olcolor='#000000';	var reverse=true;	var speed=0.04;	var shape='sphere';	var weight_mode='size';	var weight_size=0.8;	var wcolor='#00ff00';	var weight_colour={0:'#00ff00', 0.33:'#005faa',0.66:'#00af55', 1:'#000fff'}
+function addLoadEvent(your_function) { if (window.attachEvent)
+{window.attachEvent('onload', your_function);} else if
+(window.addEventListener) {window.addEventListener('load',
+your_function, false);} else {document.addEventListener('load',
+your_function, false);} } function tagcloud_load() { try {
+TagCanvas.maxSpeed = speed; TagCanvas.textColour = tcolor;
+TagCanvas.outlineColour = olcolor; TagCanvas.reverse=true;
+TagCanvas.shape=shape;
+if((weight_mode=="size")||(weight_mode=="colour")||(weight_mode=="both")){
+TagCanvas.weight=true; TagCanvas.weightMode=weight_mode;
+TagCanvas.weightSize=weight_size;
+TagCanvas.weightGradient=weight_colour; }
+TagCanvas.Start('tag_canvas','tag_html5'); } catch(err) { } }
+
+
+addLoadEvent(tagcloud_load);
+
+</script>
+
+
+	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<script type="text/javascript" id="shr-analytics" async="" src="./sonar_ard_lib_files/shareaholic_analytics.js"></script><script type="text/javascript" id="shr-google-analytics" src="./sonar_ard_lib_files/ga(1).js" data-cfasync="false" async=""></script><link rel="stylesheet" media="screen" id="shareaholic-publisher-css" href="http://blog.iteadstudio.com/wp-content/plugins/shareaholic/spritegen_default/sprite.css"><style type="text/css">.shareaholic-arrow-down{ position: absolute !important; left:45% !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 6px solid #000000 !important; }.shareaholic-tip-text{font-size:12px !important; line-height:120% !important; background: #000000 !important; color: #ffffff !important; padding: 5px !important; border-radius: 5px !important; -webkit-border-radius:5px; !important; -moz-border-radius:5px; !important}</style></head>
+
+<body class="single single-post postid-137 single-format-standard singular two-column right-sidebar">
+<div id="page" class="hfeed">
+    <div id="header">
+	<header id="branding" role="banner">
+			<hgroup>
+				<h1 id="site-title"><a href="http://blog.iteadstudio.com/" title="ITead Studio Blog" class="logo"><img src="./sonar_ard_lib_files/logo.gif" alt="iteadstudio"></a></h1>
+			</hgroup>
+            <div class="quick-access">
+                                                    <ul class="links">
+        <li class="first"><a href="http://imall.iteadstudio.com/customer/account/" title="My Account">My Account</a></li>
+        <li><a href="http://imall.iteadstudio.com/wishlist/" title="My Wishlist">My Wishlist</a></li>
+        <li><a href="http://imall.iteadstudio.com/checkout/cart/" title="My Cart" class="top-link-cart">My Cart</a></li>
+        <li><a href="http://imall.iteadstudio.com/checkout/" title="Checkout" class="top-link-checkout">Checkout</a></li>
+        <li class="last"><a href="http://imall.iteadstudio.com/customer/account/login/" title="Log In">Log In</a></li>
+    </ul>
+            </div>
+	</header><!-- #branding -->
+    </div>
+	    <div class="nav-container">
+        <ul id="nav">    	
+            <li class="first"><a href="http://imall.iteadstudio.com/development-platform.html"><span>Development Platform</span></a></li>
+            <li><a href="http://imall.iteadstudio.com/open-pcb.html"><span>OPEN PCB</span></a></li>
+            <li><a href="http://imall.iteadstudio.com/display.html"><span>Display</span></a></li>
+            <li><a href="http://imall.iteadstudio.com/prototyping.html"><span>Prototyping</span></a></li>
+            <li><a href="http://imall.iteadstudio.com/tools-and-equipment.html"><span>Tools And Equipment</span></a></li>
+            <li><a href="http://imall.iteadstudio.com/electronic-components.html"><span>Electronic Components</span></a></li>
+            <li><a href="http://imall.iteadstudio.com/wireless.html"><span>Wireless</span></a></li>
+            <li><a href="http://imall.iteadstudio.com/power.html"><span>Power</span></a></li>
+            <li class="last"><a href="http://imall.iteadstudio.com/smart-home.html"><span>Smart Home</span></a></li>
+        </ul>
+    </div>
+
+	<div id="main">
+
+		<div id="primary">
+			<div id="content" role="main">
+
+				
+					
+<article id="post-137" class="post-137 post type-post status-publish format-standard hentry category-download tag-library tag-ultrasonic">
+	<header class="entry-header">
+		<h1 class="entry-title">Arduino Library For Ultrasonic Ranging Module HC-SR04</h1>
+
+				<div class="entry-meta">
+			<span class="mc-date"><a href="./sonar_ard_lib_files/sonar_ard_lib.html" title="8:26 am" rel="bookmark"><time class="entry-date" datetime="2010-04-24T08:26:27+00:00" pubdate="">April 24, 2010</time></a></span><span class="mc-comment"><a href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#comments" title="Comment on Arduino Library For Ultrasonic Ranging Module HC-SR04"><b>14</b> Comments</a></span><span class="mc-cate"><a href="http://blog.iteadstudio.com/category/download/" title="View all posts in Download" rel="category tag">Download</a></span><span class="author vcard">By <a class="url fn n" href="http://blog.iteadstudio.com/author/itead/" title="View all posts by itead" rel="author">itead</a></span>            		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<!-- Start Shareaholic LikeButtonSetTop Automatic --><!-- End Shareaholic LikeButtonSetTop Automatic --><p>
+	We have already sold many <a href="http://iteadstudio.com/store/index.php?main_page=product_info&cPath=9&products_id=52" target="_blank">HC-SR04 </a>modules , though it’s easy use and we has published a demo ,still some user mail us for a specialized code of his own use — even just change the different Arduino pins for module.
+</p>
+<p>
+	So we decide to release a Arduino Library for those beginning user . You just need to add the library into your Arduino , and call for a function , you can get the distance.
+</p>
+<p>
+	Download the Library , unzip the release package to arduino-0018/libraries/ folder. Open the Arduino IDE , you can include the library by Sketch-Import library-Ultrasonic . And you can find the example sketch in File-Examples-Ultrasonic-UltrasonicDemo .
+</p>
+<p>
+	Here we give out a brief introduction of this ultrasonic ranging library.
+</p>
+<p>
+	<span id="more-137"></span>
+</p>
+<p>
+	It includes 3 function for user &nbsp;:
+</p>
+<h3>
+	1. Ultrasonic(int TP, int EP)<br>
+</h3>
+<div>
+	This is a initial function for ultrasonic ranging module, choose the pins for module Trig and Echo pin.
+</div>
+<div>
+	example: Ultrasonic(13,12);
+</div>
+<div>
+	then you define the digital pin 13 of Arduino for the Trig pin of HC-SR04. And the pin 12 for Echo pin.
+</div>
+<h3>
+	2. long Timing()<br>
+</h3>
+<div>
+	Trigger the ultrasonic ranging module work and return the duration that Echo pin keep high level.
+</div>
+<div>
+	example: long time; Ultrasonic hcsr; time = hcsr.Timing();
+</div>
+<div>
+	Then you start the HC-SR04 for ranging and you get the time the Echo pin keep high, you can change the time corresponds to the distance : Distance = ((Duration of high level)*(Sonic :340m/s))/2
+</div>
+<h3>
+	3. long Ranging(int sys) — (sys : CM / INC)<br>
+</h3>
+<div>
+	If you don’t want to change the time into distance yourself &nbsp;, this function will help you get the distance immediate. And the function has a parameter sys, you can use CM or ICN , than you get the distance show as centimeter or inch. This function will call the Timing() and you don’t need to use the Timing() before it.
+</div>
+<div>
+	example: long distance; Ultrasonic hcsr; distance = hcsr.Ranging(CM);
+</div>
+<div>
+	OK, now you get the distance in centimeter . It’s very easy , right ?
+</div>
+<p>
+	Download the library for <a href="http://iteadstudio.com/store/index.php?main_page=product_info&cPath=9&products_id=52" target="_blank">HC-SR04</a> ultrasonic ranging module here :
+</p>
+<p><img src="./sonar_ard_lib_files/zip.gif" alt="" title="" style="vertical-align: middle;">&nbsp;&nbsp;<strong><a href="http://blog.iteadstudio.com/download/7/">Ultrasonic ranging library</a></strong> (unknown, 8,219 hits)</p>
+<div class="shr-publisher-137 shareaholic-show-on-load" style="margin-left: 111px; overflow: hidden; height: 52px;"><div class="shr-bookmarks"><ul class="shr-socials"><li class="shr-5 shareaholic" style="margin-left:0px !important;"><a href="http://www.shareaholic.com/api/share/?title=Arduino+Library+For+Ultrasonic+Ranging+Module+HC-SR04&link=http%3A%2F%2Fblog.iteadstudio.com%2Farduino-library-for-ultrasonic-ranging-module-hc-sr04%2F&notes=%250D%250A%2509We%2520have%2520already%2520sold%2520many%2520HC-SR04%2520modules%2520%252C%2520though%2520it%2526rsquo%253Bs%2520easy%2520use%2520and%2520we%2520has%2520published%2520a%2520demo%2520%252Cstill%2520some%2520user%2520mail%2520us%2520for%2520a%2520specialized%2520code%2520of%2520his%2520own%2520use%2520%2526mdash%253B%2520even%2520just%2520change%2520the%2520different%2520Arduino%2520pins%2520for%2520module.%250D%250A%250D%250A%250D%250A%2509So%2520we%2520decide%2520to%2520release%2520a%2520Arduino%2520Library%2520for%2520those%2520beginning%2520use&short_link=&shortener=google&shortener_key=&v=1&apitype=1&apikey=8afa39428933be41f8afdb8ea21a495c&source=Shareaholic-Publishers&template=&service=5&ctype=" rel="nofollow" target="_blank" class="external" orig_title="Post to Facebook">Post to Facebook</a><div class="shr-count"><div class="shr-count-outline" aria-hidden="true" style="left: 9px; top: -10px;">8</div><div class="shr-count-outline" aria-hidden="true" style="left: 10px; top: -10px;">8</div><div class="shr-count-outline" aria-hidden="true" style="left: 11px; top: -10px;">8</div><div class="shr-count-outline" aria-hidden="true" style="left: 9px; top: -11px;">8</div><div class="shr-count-outline" aria-hidden="true" style="left: 11px; top: -11px;">8</div><div class="shr-count-outline" aria-hidden="true" style="left: 9px; top: -12px;">8</div><div class="shr-count-outline" aria-hidden="true" style="left: 10px; top: -12px;">8</div><div class="shr-count-outline" aria-hidden="true" style="left: 11px; top: -12px;">8</div><div class="shr-count-center" aria-label="Number of times this webpage has been shared" style="left: 10px; top: -11px;">8</div></div></li><li class="shr-7 shareaholic" style="margin-left:0px !important;"><a rel="nofollow" target="_blank" class="external" orig_title="Post to Twitter">Post to Twitter</a></li><li class="shr-88 shareaholic" style="margin-left:0px !important;"><a href="http://www.shareaholic.com/api/share/?title=Arduino+Library+For+Ultrasonic+Ranging+Module+HC-SR04&link=http%3A%2F%2Fblog.iteadstudio.com%2Farduino-library-for-ultrasonic-ranging-module-hc-sr04%2F&notes=%250D%250A%2509We%2520have%2520already%2520sold%2520many%2520HC-SR04%2520modules%2520%252C%2520though%2520it%2526rsquo%253Bs%2520easy%2520use%2520and%2520we%2520has%2520published%2520a%2520demo%2520%252Cstill%2520some%2520user%2520mail%2520us%2520for%2520a%2520specialized%2520code%2520of%2520his%2520own%2520use%2520%2526mdash%253B%2520even%2520just%2520change%2520the%2520different%2520Arduino%2520pins%2520for%2520module.%250D%250A%250D%250A%250D%250A%2509So%2520we%2520decide%2520to%2520release%2520a%2520Arduino%2520Library%2520for%2520those%2520beginning%2520use&short_link=&shortener=google&shortener_key=&v=1&apitype=1&apikey=8afa39428933be41f8afdb8ea21a495c&source=Shareaholic-Publishers&template=&service=88&ctype=" rel="nofollow" target="_blank" class="external" orig_title="Add to LinkedIn">Add to LinkedIn</a></li><li class="shr-304 shareaholic" style="margin-left:0px !important;"><a href="http://www.shareaholic.com/api/share/?title=Arduino+Library+For+Ultrasonic+Ranging+Module+HC-SR04&link=http%3A%2F%2Fblog.iteadstudio.com%2Farduino-library-for-ultrasonic-ranging-module-hc-sr04%2F&notes=%250D%250A%2509We%2520have%2520already%2520sold%2520many%2520HC-SR04%2520modules%2520%252C%2520though%2520it%2526rsquo%253Bs%2520easy%2520use%2520and%2520we%2520has%2520published%2520a%2520demo%2520%252Cstill%2520some%2520user%2520mail%2520us%2520for%2520a%2520specialized%2520code%2520of%2520his%2520own%2520use%2520%2526mdash%253B%2520even%2520just%2520change%2520the%2520different%2520Arduino%2520pins%2520for%2520module.%250D%250A%250D%250A%250D%250A%2509So%2520we%2520decide%2520to%2520release%2520a%2520Arduino%2520Library%2520for%2520those%2520beginning%2520use&short_link=&shortener=google&shortener_key=&v=1&apitype=1&apikey=8afa39428933be41f8afdb8ea21a495c&source=Shareaholic-Publishers&template=&service=304&ctype=" rel="nofollow" target="_blank" class="external" orig_title="Post to Google+">Post to Google+</a></li><li class="shr-236 shareaholic" style="margin-left:0px !important;"><a href="http://www.shareaholic.com/api/share/?title=Arduino+Library+For+Ultrasonic+Ranging+Module+HC-SR04&link=http%3A%2F%2Fblog.iteadstudio.com%2Farduino-library-for-ultrasonic-ranging-module-hc-sr04%2F&notes=%250D%250A%2509We%2520have%2520already%2520sold%2520many%2520HC-SR04%2520modules%2520%252C%2520though%2520it%2526rsquo%253Bs%2520easy%2520use%2520and%2520we%2520has%2520published%2520a%2520demo%2520%252Cstill%2520some%2520user%2520mail%2520us%2520for%2520a%2520specialized%2520code%2520of%2520his%2520own%2520use%2520%2526mdash%253B%2520even%2520just%2520change%2520the%2520different%2520Arduino%2520pins%2520for%2520module.%250D%250A%250D%250A%250D%250A%2509So%2520we%2520decide%2520to%2520release%2520a%2520Arduino%2520Library%2520for%2520those%2520beginning%2520use&short_link=&shortener=google&shortener_key=&v=1&apitype=1&apikey=8afa39428933be41f8afdb8ea21a495c&source=Shareaholic-Publishers&template=&service=236&ctype=" rel="nofollow" target="_blank" class="external" orig_title="Print with PrintFriendly">Print with PrintFriendly</a></li><li class="custom-comfeed" style="background-image:url(http://blog.iteadstudio.com/wp-content/plugins/shareaholic/images/comfeed.png);;margin-left:0px !important;"><a href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/feed" rel="nofollow" target="_blank" class="external" orig_title="Subscribe to the comments for this post?">Subscribe to the comments for this post?</a></li><li class="shr-201 shareaholic" style="margin-left:0px !important;"><a href="http://www.shareaholic.com/api/share/?title=Arduino+Library+For+Ultrasonic+Ranging+Module+HC-SR04&link=http%3A%2F%2Fblog.iteadstudio.com%2Farduino-library-for-ultrasonic-ranging-module-hc-sr04%2F&notes=%250D%250A%2509We%2520have%2520already%2520sold%2520many%2520HC-SR04%2520modules%2520%252C%2520though%2520it%2526rsquo%253Bs%2520easy%2520use%2520and%2520we%2520has%2520published%2520a%2520demo%2520%252Cstill%2520some%2520user%2520mail%2520us%2520for%2520a%2520specialized%2520code%2520of%2520his%2520own%2520use%2520%2526mdash%253B%2520even%2520just%2520change%2520the%2520different%2520Arduino%2520pins%2520for%2520module.%250D%250A%250D%250A%250D%250A%2509So%2520we%2520decide%2520to%2520release%2520a%2520Arduino%2520Library%2520for%2520those%2520beginning%2520use&short_link=&shortener=google&shortener_key=&v=1&apitype=1&apikey=8afa39428933be41f8afdb8ea21a495c&source=Shareaholic-Publishers&template=&service=201&ctype=" rel="nofollow" target="_blank" class="external" orig_title="Send via E-mail program">Send via E-mail program</a></li><li class="shr-40 shareaholic" style="margin-left:0px !important;"><a href="http://www.shareaholic.com/api/share/?title=Arduino+Library+For+Ultrasonic+Ranging+Module+HC-SR04&link=http%3A%2F%2Fblog.iteadstudio.com%2Farduino-library-for-ultrasonic-ranging-module-hc-sr04%2F&notes=%250D%250A%2509We%2520have%2520already%2520sold%2520many%2520HC-SR04%2520modules%2520%252C%2520though%2520it%2526rsquo%253Bs%2520easy%2520use%2520and%2520we%2520has%2520published%2520a%2520demo%2520%252Cstill%2520some%2520user%2520mail%2520us%2520for%2520a%2520specialized%2520code%2520of%2520his%2520own%2520use%2520%2526mdash%253B%2520even%2520just%2520change%2520the%2520different%2520Arduino%2520pins%2520for%2520module.%250D%250A%250D%250A%250D%250A%2509So%2520we%2520decide%2520to%2520release%2520a%2520Arduino%2520Library%2520for%2520those%2520beginning%2520use&short_link=&shortener=google&shortener_key=&v=1&apitype=1&apikey=8afa39428933be41f8afdb8ea21a495c&source=Shareaholic-Publishers&template=&service=40&ctype=" rel="nofollow" target="_blank" class="external" orig_title="Add to Reddit">Add to Reddit</a></li><li class="shr-10 shareaholic" style="margin-left:0px !important;"><a href="http://www.shareaholic.com/api/share/?title=Arduino+Library+For+Ultrasonic+Ranging+Module+HC-SR04&link=http%3A%2F%2Fblog.iteadstudio.com%2Farduino-library-for-ultrasonic-ranging-module-hc-sr04%2F&notes=%250D%250A%2509We%2520have%2520already%2520sold%2520many%2520HC-SR04%2520modules%2520%252C%2520though%2520it%2526rsquo%253Bs%2520easy%2520use%2520and%2520we%2520has%2520published%2520a%2520demo%2520%252Cstill%2520some%2520user%2520mail%2520us%2520for%2520a%2520specialized%2520code%2520of%2520his%2520own%2520use%2520%2526mdash%253B%2520even%2520just%2520change%2520the%2520different%2520Arduino%2520pins%2520for%2520module.%250D%250A%250D%250A%250D%250A%2509So%2520we%2520decide%2520to%2520release%2520a%2520Arduino%2520Library%2520for%2520those%2520beginning%2520use&short_link=&shortener=google&shortener_key=&v=1&apitype=1&apikey=8afa39428933be41f8afdb8ea21a495c&source=Shareaholic-Publishers&template=&service=10&ctype=" rel="nofollow" target="_blank" class="external" orig_title="Add to Technorati Favorites">Add to Technorati Favorites</a></li></ul><style type="text/css">ul.shr-socials li.shareaholic{background-image:url(http://blog.iteadstudio.com/wp-content/plugins/shareaholic/spritegen_default/sprite.png) !important;}</style></div></div><!-- Start Shareaholic LikeButtonSetBottom Automatic --><!-- End Shareaholic LikeButtonSetBottom Automatic -->			</div><!-- .entry-content -->
+
+	<footer class="entry-meta">
+		<span class="mc-tags">Tags: <a href="http://blog.iteadstudio.com/tag/library/" rel="tag">Library</a>, <a href="http://blog.iteadstudio.com/tag/ultrasonic/" rel="tag">Ultrasonic</a></span><span class="mc-top"><a href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#site-title" title="Back Top">Back Top</a></span>
+			</footer><!-- .entry-meta -->
+</article><!-- #post-137 -->
+
+					<nav id="nav-single">
+						<h3 class="assistive-text">Post navigation</h3>
+						<span class="nav-previous"><a href="http://blog.iteadstudio.com/2-4g-wireless-module-nrf24l01-module/">2.4G Wireless Module : nRF24L01 Module</a></span>
+						<span class="nav-next"><a href="http://blog.iteadstudio.com/breakout-board-for-smd-ics/">Breakout board for SMD ICs</a></span>
+					</nav><!-- #nav-single -->
+
+						<div id="comments">
+	
+	
+			<h2 id="comments-title">
+			Responses to “<span>Arduino Library For Ultrasonic Ranging Module HC-SR04</span>”		</h2>
+
+		
+		<ol class="commentlist">
+				<li class="comment even thread-even depth-1" id="li-comment-580">
+		<article id="comment-580" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="./sonar_ard_lib_files/460a344251a8c663218237985a00db23" class="avatar avatar-68 photo" height="68" width="68"><span class="fn">Shawn McNown</span> on <a href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#comment-580"><time pubdate="" datetime="2012-11-22T01:59:51+00:00">November 22, 2012 at 1:59 am</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>I was womdering if you had that library for the “HC-SR04″ in a different archive format (ex.’.zip’) or in a text format. I purchased a unit and would really love to move forward with this model and if useful possibly purchase more. Thank You<br>
+Sincerely,</p>
+</div>
+
+			<div class="reply">
+				<a class="comment-reply-link" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/?replytocom=580#respond" onclick="return addComment.moveForm(&quot;comment-580&quot;, &quot;580&quot;, &quot;respond&quot;, &quot;137&quot;)">Reply <span>↓</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-581">
+		<article id="comment-581" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="./sonar_ard_lib_files/44796674e3ec8cf313ddb7a661c9ad2a" class="avatar avatar-68 photo" height="68" width="68"><span class="fn">Greg M. Johnson</span> on <a href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#comment-581"><time pubdate="" datetime="2012-11-22T02:00:17+00:00">November 22, 2012 at 2:00 am</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>I get a message that the RAR is damaged.</p>
+</div>
+
+			<div class="reply">
+				<a class="comment-reply-link" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/?replytocom=581#respond" onclick="return addComment.moveForm(&quot;comment-581&quot;, &quot;581&quot;, &quot;respond&quot;, &quot;137&quot;)">Reply <span>↓</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-582">
+		<article id="comment-582" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="./sonar_ard_lib_files/13100e621af1db5ebdaf0e5baf3507c2" class="avatar avatar-68 photo" height="68" width="68"><span class="fn">@hugobiwan</span> on <a href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#comment-582"><time pubdate="" datetime="2012-11-22T02:00:43+00:00">November 22, 2012 at 2:00 am</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>This is great and thank you a lot for sharing.<br>
+Ultrasonic sensors are very useful but take a lot or lines, and this sensor is one of the cheapiest.<br>
+Your library will be very useful. Personally i am trying to use it with a hacked robo sapien:-)<br>
+Best regards and thanks from France !<br>
+@hugobiwan</p>
+</div>
+
+			<div class="reply">
+				<a class="comment-reply-link" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/?replytocom=582#respond" onclick="return addComment.moveForm(&quot;comment-582&quot;, &quot;582&quot;, &quot;respond&quot;, &quot;137&quot;)">Reply <span>↓</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-583">
+		<article id="comment-583" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="./sonar_ard_lib_files/89777bd8151d11fcdd6c377ee0f2f544" class="avatar avatar-68 photo" height="68" width="68"><span class="fn">T Greenbaum</span> on <a href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#comment-583"><time pubdate="" datetime="2012-11-22T02:00:58+00:00">November 22, 2012 at 2:00 am</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>The new Arduino 1.0 does not compile the Ultrasonic library because ultrasonic.h has #include “WProgram.h” and the WProgram.h is removed from version 1.0 – – see the forum <a href="http://arduino.cc/forum/index.php/topic,81078.msg613177.html#msg613177" rel="nofollow">http://arduino.cc/forum/index.php/topic,81078.msg613177.html#msg613177</a></p>
+</div>
+
+			<div class="reply">
+				<a class="comment-reply-link" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/?replytocom=583#respond" onclick="return addComment.moveForm(&quot;comment-583&quot;, &quot;583&quot;, &quot;respond&quot;, &quot;137&quot;)">Reply <span>↓</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-584">
+		<article id="comment-584" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="./sonar_ard_lib_files/ec65de8c108606c2d326375e2881757c" class="avatar avatar-68 photo" height="68" width="68"><span class="fn">Luiz Gustavo</span> on <a href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#comment-584"><time pubdate="" datetime="2012-11-22T02:01:13+00:00">November 22, 2012 at 2:01 am</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>Greenbaum, change the “WProgram.h” reference to “Arduino.h” and everything should run fine.</p>
+</div>
+
+			<div class="reply">
+				<a class="comment-reply-link" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/?replytocom=584#respond" onclick="return addComment.moveForm(&quot;comment-584&quot;, &quot;584&quot;, &quot;respond&quot;, &quot;137&quot;)">Reply <span>↓</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-585">
+		<article id="comment-585" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="./sonar_ard_lib_files/ef474ba5523b4bacbf46e10c8793b262" class="avatar avatar-68 photo" height="68" width="68"><span class="fn">James</span> on <a href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#comment-585"><time pubdate="" datetime="2012-11-22T02:01:29+00:00">November 22, 2012 at 2:01 am</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>It’s “INC” for inches, not “ICN” as shown above.</p>
+</div>
+
+			<div class="reply">
+				<a class="comment-reply-link" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/?replytocom=585#respond" onclick="return addComment.moveForm(&quot;comment-585&quot;, &quot;585&quot;, &quot;respond&quot;, &quot;137&quot;)">Reply <span>↓</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-586">
+		<article id="comment-586" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="./sonar_ard_lib_files/558ef0d9cb6fece562590e18859e7e1f" class="avatar avatar-68 photo" height="68" width="68"><span class="fn">raz</span> on <a href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#comment-586"><time pubdate="" datetime="2012-11-22T02:01:44+00:00">November 22, 2012 at 2:01 am</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>here is update link for library codes<br>
+<a href="http://ultrasonic-ranging-module-hc-sr04-updates.googlecode.com/files/Ultrasonic.rar" rel="nofollow">http://ultrasonic-ranging-module-hc-sr04-updates.googlecode.com/files/Ultrasonic.rar</a></p>
+</div>
+
+			<div class="reply">
+				<a class="comment-reply-link" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/?replytocom=586#respond" onclick="return addComment.moveForm(&quot;comment-586&quot;, &quot;586&quot;, &quot;respond&quot;, &quot;137&quot;)">Reply <span>↓</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-3397">
+		<article id="comment-3397" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="./sonar_ard_lib_files/116c233c2e2eb8af6f6c2515b319efc9" class="avatar avatar-68 photo" height="68" width="68"><span class="fn">Loïc</span> on <a href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#comment-3397"><time pubdate="" datetime="2013-03-26T17:56:27+00:00">March 26, 2013 at 5:56 pm</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>Thanks from Switzerland ! It’s perfect, but you should change  reference to  in library <img src="./sonar_ard_lib_files/icon_wink.gif" alt=";-)" class="wp-smiley"><br>
+Thanks you very much !</p>
+</div>
+
+			<div class="reply">
+				<a class="comment-reply-link" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/?replytocom=3397#respond" onclick="return addComment.moveForm(&quot;comment-3397&quot;, &quot;3397&quot;, &quot;respond&quot;, &quot;137&quot;)">Reply <span>↓</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-3528">
+		<article id="comment-3528" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="./sonar_ard_lib_files/cad728dbdaebd3ef50e8d430fad1e24a" class="avatar avatar-68 photo" height="68" width="68"><span class="fn">JohnV</span> on <a href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#comment-3528"><time pubdate="" datetime="2013-04-28T14:58:21+00:00">April 28, 2013 at 2:58 pm</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>I keep getting the error:<br>
+‘class Ultrasonic’ has no member named ‘Ranging’<br>
+also:<br>
+UltrasonicDemo.pde: In function ‘void loop()’:<br>
+UltrasonicDemo:15: error: ‘class Ultrasonic’ has no member named ‘Ranging’<br>
+UltrasonicDemo:15: error: ‘CM’ was not declared in this scope<br>
+Would you post the Ultrasonic.h file your using?<br>
+Thanks</p>
+</div>
+
+			<div class="reply">
+				<a class="comment-reply-link" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/?replytocom=3528#respond" onclick="return addComment.moveForm(&quot;comment-3528&quot;, &quot;3528&quot;, &quot;respond&quot;, &quot;137&quot;)">Reply <span>↓</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-3541">
+		<article id="comment-3541" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="./sonar_ard_lib_files/ef980d027c401d9536d50ea966de486a" class="avatar avatar-68 photo" height="68" width="68"><span class="fn"><a href="http://none/" rel="external nofollow" class="url">Mike</a></span> on <a href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#comment-3541"><time pubdate="" datetime="2013-04-30T18:42:26+00:00">April 30, 2013 at 6:42 pm</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>Hey, I have hc-sr04.  The distance read is a bit short meaning it doesn’t seem to read anything past 40 inches.  I have the max distance set at 300 cm which should be plenty.  I also noticed that within the &lt;40 inches range the sensor doesnt detect objects (a 16"x20" board) consistently.<br>
+I am using an arduino uno r3, adafruit motor shield, PING library,  and there is 18" of 22 awg soild wire between the 10 and 9 pins of my shield and hc-sr04 trig, and echo pins.  All connections have been soldered.  I am measuring from 40" off the floor-in line of the sensor.<br>
+Do I need to shield my wire? Is it too long?<br>
+Do I need to make a cone for my sensor to pick up sound?</p>
+<p>Thank you in advance,<br>
+Mike</p>
+</div>
+
+			<div class="reply">
+				<a class="comment-reply-link" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/?replytocom=3541#respond" onclick="return addComment.moveForm(&quot;comment-3541&quot;, &quot;3541&quot;, &quot;respond&quot;, &quot;137&quot;)">Reply <span>↓</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="http://www.machiavellico.com/?p=233" rel="external nofollow" class="url">Sensore hc-sr04 e max7219, rilevatore di distanza a ultrasuoni | Machiavellico.com</a></p>
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-9613">
+		<article id="comment-9613" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="./sonar_ard_lib_files/e96fc1e6bf2c88e6b62f6f222ce444f6" class="avatar avatar-68 photo" height="68" width="68"><span class="fn">Hemal</span> on <a href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#comment-9613"><time pubdate="" datetime="2013-10-29T06:09:39+00:00">October 29, 2013 at 6:09 am</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>Hello,<br>
+This library doesnt work with latest IDE, I created a github repo with the modified library to work with arduino v1 or greater.<br>
+<a href="https://github.com/hemalchevli/ultrasonic-library" rel="nofollow">https://github.com/hemalchevli/ultrasonic-library</a></p>
+</div>
+
+			<div class="reply">
+				<a class="comment-reply-link" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/?replytocom=9613#respond" onclick="return addComment.moveForm(&quot;comment-9613&quot;, &quot;9613&quot;, &quot;respond&quot;, &quot;137&quot;)">Reply <span>↓</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class="children">
+	<li class="comment odd alt depth-2" id="li-comment-11791">
+		<article id="comment-11791" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="./sonar_ard_lib_files/f5d7e3712b24a17eb8b7a882391a1b1d" class="avatar avatar-39 photo" height="39" width="39"><span class="fn">Mauro Moura</span> on <a href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#comment-11791"><time pubdate="" datetime="2014-01-05T02:57:54+00:00">January 5, 2014 at 2:57 am</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>Thanks a lot man, only your version worked for me</p>
+</div>
+
+			<div class="reply">
+				<a class="comment-reply-link" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/?replytocom=11791#respond" onclick="return addComment.moveForm(&quot;comment-11791&quot;, &quot;11791&quot;, &quot;respond&quot;, &quot;137&quot;)">Reply <span>↓</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+</ul>
+</li>
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-12163">
+		<article id="comment-12163" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt="" src="./sonar_ard_lib_files/b119588e9dbac6013d17a6aa2b616563" class="avatar avatar-68 photo" height="68" width="68"><span class="fn">Manuel</span> on <a href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#comment-12163"><time pubdate="" datetime="2014-03-25T17:08:09+00:00">March 25, 2014 at 5:08 pm</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>Anyone have problems that cannot range more than 80-90cm? have anyone solved it?</p>
+</div>
+
+			<div class="reply">
+				<a class="comment-reply-link" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/?replytocom=12163#respond" onclick="return addComment.moveForm(&quot;comment-12163&quot;, &quot;12163&quot;, &quot;respond&quot;, &quot;137&quot;)">Reply <span>↓</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+		</ol>
+
+		
+	
+									<div id="respond">
+				<h3 id="reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#respond" style="display:none;">Cancel reply</a></small></h3>
+									<form action="http://blog.iteadstudio.com/wp-comments-post.php" method="post" id="commentform">
+																			<p class="comment-notes">Your email address will not be published. Required fields are marked <span class="required">*</span></p>							<p class="comment-form-author"><label for="author">Name</label> <span class="required">*</span><input id="author" name="author" type="text" value="" size="30" aria-required="true"></p>
+<p class="comment-form-email"><label for="email">Email</label> <span class="required">*</span><input id="email" name="email" type="text" value="" size="30" aria-required="true"></p>
+<p class="comment-form-url"><label for="url">Website</label><input id="url" name="url" type="text" value="" size="30"></p>
+												<p class="comment-form-comment"><label for="comment">Comment</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>						<p class="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:  <code>&lt;a href="" title=""&gt; &lt;abbr title=""&gt; &lt;acronym title=""&gt; &lt;b&gt; &lt;blockquote cite=""&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=""&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=""&gt; &lt;strike&gt; &lt;strong&gt; </code></p>						<p class="form-submit">
+							<input name="submit" type="submit" id="submit" value="Post Comment">
+							<input type="hidden" name="comment_post_ID" value="137" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+						</p>
+						<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="100911d028"></p>					</form>
+							</div><!-- #respond -->
+						
+</div><!-- #comments -->
+
+				
+			</div><!-- #content -->
+		</div><!-- #primary -->
+
+
+	</div><!-- #main -->
+
+	<footer id="colophon" role="contentinfo">
+
+			
+
+			    <div class="footcol">
+        <ul>
+            <li><span>Join Our Community:</span></li>
+            <li class="facebook"><a href="http://www.facebook.com/pages/ITead-Studio/248984101795699">FACEBOOK</a></li>
+            <li class="twitter"><a href="https://twitter.com/Iteadstudio">TWITTER</a></li>
+            <li class="google"><a href="https://plus.google.com/u/0/b/110830231150498525132/">GOOGLE+</a></li>
+            <li class="forum"><a href="http://blog.iteadstudio.com/">BLOG</a></li>
+            <li class="blog"><a href="http://forum.iteadstudio.com/">FORUM</a></li>
+        </ul>
+    </div>
+    <form action="http://imall.iteadstudio.com/newsletter/subscriber/new/" method="post" id="newsletter-validate-detail">
+        <ul>
+            <li><img src="./sonar_ard_lib_files/newsletter.gif"><label>Sign up for best deal</label></li>
+            <li><input type="text" name="email" id="newsletter" title="Sign up for our newsletter" class="input-newletter required-entry validate-email"><button class="button" title="go" type="submit"><span><span>GO</span></span></button></li>
+        </ul>
+    </form>
+    <div class="footer-container">
+        <div class="footer">
+        	<div class="col-left">
+        	    <table class="foottable" border="0">
+                    <tbody>
+                    <tr><th>Company info</th><th>Customer Service</th><th>Payment And Shipping</th><th>Cooperation</th></tr>
+                    <tr>
+                    <td><a href="http://imall.iteadstudio.com/about-itead">-About ITEAD</a></td>
+                    <td><a href="http://imall.iteadstudio.com/contact-us">-Contact us</a></td>
+                    <td><a href="http://imall.iteadstudio.com/payment-method">-Payment method</a></td>
+                    <td>-Designer/Engineer</td>
+                    </tr>
+                    <tr>
+                    <td><a href="http://imall.iteadstudio.com/distributors">-Distributors </a></td>
+                    <td><a href="http://imall.iteadstudio.com/track-your-order">-Track your order</a></td>
+                    <td><a href="http://imall.iteadstudio.com/shipping_and_returns">-Shipping &amp; Return</a></td>
+                    <td>-Company/Organization</td>
+                    </tr>
+                    <tr>
+                    <td>&nbsp;</td>
+                    <td><span><a href="http://imall.iteadstudio.com/privacy_and_notice">-Privacy &amp; Notice</a></span></td>
+                    <td>&nbsp;</td>
+                    <td>-寻求合作供应商</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-right">
+                 <p><img usemap="foot_map" src="./sonar_ard_lib_files/Post_and_Payment.png" alt=""></p>
+                <map name="foot_map">
+                <area shape="rect" coords="6,19,55,48" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#">
+                <area shape="rect" coords="61,19,111,48" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#">
+                <area shape="rect" coords="116,19,166,48" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#">
+                <area shape="rect" coords="170,19,220,48" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#">
+                <area shape="rect" coords="225,19,275,48" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#">
+                <area shape="rect" coords="6,75,55,104" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#">
+                <area shape="rect" coords="61,75,111,104" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#">
+                <area shape="rect" coords="116,75,166,99" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#">
+                <area shape="rect" coords="170,75,220,99" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#">
+                <area shape="rect" coords="225,75,275,99" href="http://blog.iteadstudio.com/arduino-library-for-ultrasonic-ranging-module-hc-sr04/#"> 
+                </map>
+            </div>        
+        </div>
+        <div class="partnersout">
+            <div class="partnersin">
+                <p><span>Partners</span>:&nbsp;<a href="http://henningkarlsen.com/electronics/index.php">Henningkarlsen</a>&nbsp;|&nbsp;<a href="http://www.brc-electronics.nl/index.php">Brc-electronics</a>&nbsp;|&nbsp;<a href="http://belogic.com/uzebox/index.asp">Uzebox</a>&nbsp;|&nbsp;<a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=info@iteadstudio.com" target="_blank">TO Be our partners</a></p>
+            </div>
+            <div class="copyright">Copyright&nbsp;©&nbsp;2012. ITEAD Intelligent Systems Co.Ltd</div>
+        </div>
+    </div>
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<script type="text/javascript">var SHRSB_Settings = {"shr-publisher-137":{"link":"http:\/\/blog.iteadstudio.com\/arduino-library-for-ultrasonic-ranging-module-hc-sr04\/","shortener":"google","title":"Arduino Library For Ultrasonic Ranging Module HC-SR04","notes":"%0D%0A%09We%20have%20already%20sold%20many%20HC-SR04%20modules%20%2C%20though%20it%26rsquo%3Bs%20easy%20use%20and%20we%20has%20published%20a%20demo%20%2Cstill%20some%20user%20mail%20us%20for%20a%20specialized%20code%20of%20his%20own%20use%20%26mdash%3B%20even%20just%20change%20the%20different%20Arduino%20pins%20for%20module.%0D%0A%0D%0A%0D%0A%09So%20we%20decide%20to%20release%20a%20Arduino%20Library%20for%20those%20beginning%20use","service":"5,7,88,304,236,201,40,10","apikey":"8afa39428933be41f8afdb8ea21a495c","expand":true,"src":"http:\/\/blog.iteadstudio.com\/wp-content\/plugins\/shareaholic\/spritegen_default","localize":true,"share_src":"http:\/\/www.shareaholic.com","rel":"nofollow","target":"_blank","center":true,"twitter_template":"%24%7Btitle%7D+-+%24%7Bshort_link%7D+via+%40Shareaholic","mode":"inject","designer_toolTips":"1","tip_bg_color":"#000000","tip_text_color":"#ffffff","custom_link":{"after_4":{"li_class":"custom-comfeed","link":"http:\/\/blog.iteadstudio.com\/arduino-library-for-ultrasonic-ranging-module-hc-sr04\/feed","tooltip":"Subscribe to the comments for this post?","style":"background-image:url(http:\/\/blog.iteadstudio.com\/wp-content\/plugins\/shareaholic\/images\/comfeed.png);"}}}};</script>
+    <ul class="fixed-tabs">
+        <li class="tab-new"><a href="http://imall.iteadstudio.com/new_products/" title="New Arrivals" target="_self">New</a></li>
+        <li class="tab-blog"><a href="http://blog.iteadstudio.com/" title="ITead Blog" target="_self">Blog</a></li>
+        <li class="tab-forum"><a href="http://forum.iteadstudio.com/" title="ITead Forum" target="_self">Forum</a></li>
+        <li class="tab-imall"><a href="http://imall.iteadstudio.com/" title="ITead iMall" target="_self">iMall</a></li>
+    </ul>
+
+
+<div id="__lpform_author" style="max-height: 16px; vertical-align: top; position: absolute; top: 3587.5px; left: 537.5px; z-index: 14;"><img id="__lpform_author_icon" src="chrome-extension://hdokiejnpimakedhajhdlcegeplioahd/images/formfill16x16.png" onerror="this.removeAttribute(&#39;onerror&#39;); this.src = &#39;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAvElEQVQ4T2NkoBAwIukXALL9gViBgJkPgPIbgfgDSB2yAQVAfj+RDioEqpuAbkADUKAeiB0JGLIfKN8IxCD1KC6AGYDsqgtANf+B2BDJUBCfaAM2QDUGkGMAcpjA/Qx1EVEugHkJZDlcA7EGgKJSHi0wHwL5D4g1wAGoEISRwQEgB4SJCkSQZns0Aw6SYgDICyCMDEDOJ8oL6E5HMwfsDayxQHFSBmUmUIJBdzq6C0DeWAATRE626AqJ4gMAKh82EQu8MAEAAAAASUVORK5CYII=&#39;;" height="16" width="16" style="opacity: 0.6; vertical-align: top;"></div><iframe id="shr_oven" src="./sonar_ard_lib_files/analytics_frame.html" style="display: none;"></iframe><script id="hiddenlpsubmitdiv" style="display: none;"></script><script>try{for(var lastpass_iter=0; lastpass_iter < document.forms.length; lastpass_iter++){ var lastpass_f = document.forms[lastpass_iter]; if(typeof(lastpass_f.lpsubmitorig2)=="undefined"){ lastpass_f.lpsubmitorig2 = lastpass_f.submit; lastpass_f.submit = function(){ var form=this; var customEvent = document.createEvent("Event"); customEvent.initEvent("lpCustomEvent", true, true); var d = document.getElementById("hiddenlpsubmitdiv"); if (d) {for(var i = 0; i < document.forms.length; i++){ if(document.forms[i]==form){ d.innerText=i; } } d.dispatchEvent(customEvent); }form.lpsubmitorig2(); } } }}catch(e){}</script></body></html>

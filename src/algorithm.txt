@@ -1,0 +1,62 @@
+Algorithm for bot movement
+
+setup car
+    start sensors
+    initialize inputs, outputs
+    start moving car  ?
+
+
+functions
+    forward
+        turn motors on in specific way
+    backward
+        turn motors on in specific way
+
+    stop
+        turn motors off
+    left...
+    right...
+
+    search...
+
+    // for loop, get all measurements?
+
+Measurement Logic
+    start at center
+    get distance of objects from sensors 
+        if distance is less than margin
+            stop moving
+                ...?
+    turn 90ish left
+    get distance of objects from sensors 
+    turn 180ish right
+    get distance of objects from sensors 
+
+decide where to move next
+    find direction where distance furthest away
+    //use enum?
+
+main loop
+
+    start
+    increment cycles counter
+    if counter > some amount
+        check surroundings
+        if (some distance checks)
+            move this way
+        reset cycles counter
+
+    get distance
+    get movement choice
+
+
+Roy,
+I've updated the project proposal and uploaded it on d2l.  
+Unfortunately the first kit we picked will not arrive in time.
+Despite the guarantee of 24 hour shipping to the US, it will actually
+take 2-3 weeks.  I quickly ordered a similar product, which is linked 
+in the project proposal. It will arrive tomorrow or Wednesday, so I'm sure we'll
+have at least something for the progress report (we're working on the algorithms
+right now anyway).
+
+
