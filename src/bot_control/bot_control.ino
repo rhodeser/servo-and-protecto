@@ -1,4 +1,5 @@
 #include <NewPing.h>
+#include <Servo.h>
 
 #define TRIGGER_PIN  8  // Arduino pin tied to trigger pin on the ultrasonic sensor.
 #define ECHO_PIN     9  // Arduino pin tied to echo pin on the ultrasonic sensor.
@@ -13,11 +14,14 @@
 */
 
 NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pins and maximum distance.
+Servo myservo;
+int pos = 0;
 
 void LED_blink(unsigned int time);
 
 void setup() {
   Serial.begin(115200); // Open serial monitor at 115200 baud to see ping results.
+  myservo.attach(5);
   pinMode(LED, OUTPUT);
 }
 
@@ -31,6 +35,10 @@ void loop() {
   Serial.print(uS / US_ROUNDTRIP_CM); // Convert ping time to distance in cm and print result (0 = outside set distance range)
   Serial.println("cm");
   distance = uS / US_ROUNDTRIP_CM;
+ 
+  myservo.write(pos);              // tell servo to go to position in variable 'pos' 
+  delay(5000);                       // waits 15ms for the servo to reach the position 
+  pos = 180;
   
   // New algorithm
   /*
@@ -109,6 +117,7 @@ void halt() {
   delay(time);
   */
 }
+
 
 void LED_blink(unsigned int time){
   // blink LED and busy wait
