@@ -49,14 +49,14 @@ NewPing sonar(TRIG_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pin and max
 //*
 //**************************************************************************************************************
 
-//#include <Servo.h> 
-#include <ServoTimer2.h>
+#include <Servo.h> 
+//#include <ServoTimer2.h>
 
 #define LEFT 180
 #define CENTER 90
 #define RIGHT 0
 
-ServoTimer2 ultrasonicServo;  // create servo object to control a servo 
+Servo ultrasonicServo;  // create servo object to control a servo 
  
 int currentPos = 0;    // variable to store the servo position 
 
