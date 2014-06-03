@@ -31,8 +31,8 @@
 
 NewPing sonar(TRIG_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pin and maximum distance.
 
-#define COLLISION_DISTANCE 40 // in cm - depends on the floor surface and speed setting
-#define AVOIDANCE_DISTANCE 50 //  
+#define COLLISION_DISTANCE 60 // in cm - depends on the floor surface and speed setting
+#define AVOIDANCE_DISTANCE 80 //  
 //**************************************************************************************************************
 //*
 //* Servo definitions 
@@ -49,17 +49,18 @@ NewPing sonar(TRIG_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pin and max
 //*
 //**************************************************************************************************************
 
-#include <Servo.h> 
+//#include <Servo.h> 
+#include <ServoTimer2.h>
 
 #define LEFT 180
 #define CENTER 90
 #define RIGHT 0
 
-Servo ultrasonicServo;  // create servo object to control a servo 
+ServoTimer2 ultrasonicServo;  // create servo object to control a servo 
  
 int currentPos = 0;    // variable to store the servo position 
 
-#define servoPin 9
+#define servoPin 10
 #define SERVO_MIN_MICROS 650   // initial position (0 degrees) in microseconds
 #define SERVO_MAX_MICROS 1075  // full range position (180 degrees) in microseconds 
 
@@ -107,10 +108,12 @@ AF_DCMotor motor2(2, MOTOR12_1KHZ);
 
 #define STOP 0
 #define SLOW 150
-#define MEDIUM 215
+#define MEDIUM 230
 #define MAXSPEED 255
 
 int throttle = 0;
+// used to balance power across wheels
+
 
 //**************************************************************************************************************
 //*
@@ -136,7 +139,7 @@ void setup() {
   
     // start the serial interface
     Serial.begin(9600);
-  
+    int myspeed = 250;
     // setup servo
     ultrasonicServo.attach(servoPin, SERVO_MIN_MICROS, SERVO_MAX_MICROS);  // attaches the servo on pin 10 to the servo object
     //ultrasonicServo.attach(servoPin);   
@@ -416,6 +419,7 @@ void brake(){ // this will require a modded AFMOTOR
 }
 
 void drive_forward(){
+    //setSpeed(myspeed);
     motor1.run(FORWARD);
     motor2.run(FORWARD);
 }
@@ -467,7 +471,6 @@ void rotate_right(){
     delay(ROTATE_ACT_TIME);
     freewheel();
 }
-
 void u_turn(){
     motor2.run(BACKWARD);
     motor1.run(FORWARD);
@@ -487,7 +490,7 @@ void u_turn(){
 //Changed Motor speed for right turn, doing right turn only, changed detection collision zone time
 #define MIN(a, b) (a < b ? a : b)
 
-#define SPEED_OFFSET -16 // this offset is specific to your motor set - adjust till you get a straight path
+#define SPEED_OFFSET -23 // this offset is specific to your motor set - adjust till you get a straight path
 
 void changeSpeed(int speed){
   speed = MIN(speed, MAXSPEED);
@@ -505,7 +508,7 @@ void changeSpeed(int speed){
   }
 }
 
-#define SPEED_CHANGE_TIME 5 // time in milliseconds to react
+#define SPEED_CHANGE_TIME 10 // time in milliseconds to react
 
 void setSpeed(int speed){
     motor1.setSpeed(speed+SPEED_OFFSET);
