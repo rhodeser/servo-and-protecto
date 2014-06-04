@@ -10,13 +10,13 @@
 
 NewPing sonar(TRIG_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pin and maximum distance.
 
-float dangerThreshold = 10.0; // 25 cm - depends on the floor surface and speed setting
+float dangerThreshold = 25.0; // 25 cm - depends on the floor surface and speed setting
 //************************************************************ 
 // Servo
 
 #include <Servo.h> 
-#define LEFT 30
-#define CENTER 90
+#define LEFT 10
+#define CENTER 70
 #define RIGHT 150
 
 Servo ultrasonicServo;  // create servo object to control a servo 
@@ -70,35 +70,57 @@ void setup() {
 void loop() {
   
     float distanceForward = ping();
-    delay(500);
-        
-        
+    //delay(500);
+    if (distanceForward > dangerThreshold) //if path is clear
+    {
+        drive_forward();
+    }
+    else // if path is blocked
+    {
+        //brake();   
+        freewheel();
+       
         Serial.print("Center: ");
         Serial.print(distanceForward);
         Serial.println("cm");
         // look left
         servo_position(LEFT);  
-        delay(500);
+        //delay(500);
         float distanceLeft = ping();
         Serial.print("Left: ");
         Serial.print(distanceLeft);
         Serial.println("cm");
         
+        
         // look right
-        delay(500);
+        //delay(500);
         servo_position(RIGHT);  
         float distanceRight = ping();
         Serial.print("Right: ");
         Serial.print(distanceRight);
         Serial.println("cm");
-        delay(500);
+        //delay(500);
+
         
         // re-center the ultrasonic
         servo_position(CENTER);
-           
-        drive_forward();
-        //delay(2000);
-        //freewheel();
+        
+        // go the least obstructed way
+               
+        if (distanceLeft > distanceRight && distanceLeft > dangerThreshold)       //if left is less obstructed 
+        {
+            rotate_left();
+        }
+        else if (distanceRight > distanceLeft && distanceRight > dangerThreshold) //if right is less obstructed 
+        {
+           rotate_right();
+        }
+        else // equally blocked or less than danger threshold left or right
+        {
+            u_turn();
+        }   
+    }   
+
     }
     
 // servo control
@@ -154,6 +176,28 @@ void brake(){ // this will require a modded AFMOTOR
     motor1.run(BRAKE);
     motor2.run(BRAKE);
     delay(BRAKE_ACT_TIME); // braking time
+}
+
+void rotate_left(){
+    motor1.run(BACKWARD);
+    motor2.run(FORWARD);
+    delay(ROTATE_ACT_TIME);
+    freewheel();
+}
+
+void rotate_right(){
+    //changespeed(MEDIUM);
+    motor2.run(BACKWARD);
+    motor1.run(FORWARD);
+    delay(ROTATE_ACT_TIME);
+    freewheel();
+}
+
+void u_turn(){
+    motor2.run(BACKWARD);
+    motor1.run(FORWARD);
+    delay(UTURN_ACT_TIME); // twice as long as rotate right to end up 180 degrees around
+    freewheel();
 }
 
 //**************************************************************************************************************
