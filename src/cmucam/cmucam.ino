@@ -16,16 +16,16 @@
 #include <CMUcam4.h>
 #include <CMUcom4.h>
 
-#define RED_MIN 220
+#define RED_MIN 170
 #define RED_MAX 256
 #define GREEN_MIN 0
-#define GREEN_MAX 50
+#define GREEN_MAX 120
 #define BLUE_MIN 0
-#define BLUE_MAX 50
+#define BLUE_MAX 90
 #define LED_BLINK 5 // 5 Hz
 #define WAIT_TIME 3000 // 5 seconds
-#define PIXELS_THRESHOLD 2 // The percent of tracked pixels needs to be greater than this 0=0% - 255=100%.
-#define CONFIDENCE_THRESHOLD 40 // The percent of tracked pixels in the bounding box needs to be greater than this 0=0% - 255=100%.
+#define PIXELS_THRESHOLD 1 // The percent of tracked pixels needs to be greater than this 0=0% - 255=100%.
+#define CONFIDENCE_THRESHOLD 4 // The percent of tracked pixels in the bounding box needs to be greater than this 0=0% - 255=100%.
 
 #define NOISE_FILTER_LEVEL 2 // Filter out runs of tracked pixels smaller than this in length 0 - 255.
 CMUcam4 cam(CMUCOM4_SERIAL);
@@ -34,10 +34,10 @@ void setup()
 {
   cam.begin();
   Serial.begin(115200);
-  Serial.print("Starting the camera");
+  Serial.print("Starting the camera\n");
   // Wait for auto gain and auto white balance to run.
 
-  cam.LEDOn(3);                                            
+  cam.LEDOn(10);                                            
   pinMode(13, OUTPUT); 
   // Turn auto gain and auto white balance off.
   
@@ -53,15 +53,15 @@ void setup()
 void loop()
 {
   CMUcam4_tracking_data_t data;
-  if (cam.trackColor()) Serial.print("trackColor() did not work");
+  if (cam.trackColor()) Serial.print("trackColor() did not work\n");
   //cam.trackColor(RED_MIN, RED_MAX, GREEN_MIN, GREEN_MAX, BLUE_MIN, BLUE_MAX);
-  else Serial.print("Color was tracked");
-  for(int i=0; i<8;i++)
+  else Serial.print("Color was tracked\n");
+  for(int i=0; i<5;i++)
   {
     cam.trackColor();
-    Serial.print("tracking again");
-    Serial.println();
+    Serial.print("tracking again\n");
     cam.getTypeTDataPacket(&data); // Get a tracking packet.
+    /*
     Serial.print("mx");
     Serial.println();
     Serial.print(data.mx);
@@ -70,12 +70,10 @@ void loop()
     Serial.println();
     Serial.print(data.my);
     Serial.println();
+    */
     Serial.print("pixels\n");
-    Serial.println();
-    //Serial.print(data.my);
     Serial.print(data.pixels);
-    Serial.print("confidence");
-    Serial.println();    
+    Serial.print("confidence\n");   
     Serial.print(data.confidence);
     digitalWrite(13, HIGH);   // set the LED on
     delay(300);              // wait for a second
@@ -102,6 +100,7 @@ void loop()
           cam.LEDOn(5);
           cam.LEDOn(5);
           Serial.println();
+          Serial.print("Found red color\n");
           Serial.print("Got HEEM");
         }
         else
