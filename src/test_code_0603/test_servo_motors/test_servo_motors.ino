@@ -15,9 +15,9 @@ float dangerThreshold = 25.0; // 25 cm - depends on the floor surface and speed 
 // Servo
 
 #include <Servo.h> 
-#define LEFT 10
-#define CENTER 70
-#define RIGHT 150
+#define LEFT 180
+#define CENTER 100
+#define RIGHT 20
 
 Servo ultrasonicServo;  // create servo object to control a servo 
  
@@ -95,7 +95,7 @@ void loop() {
         // look right
         //delay(500);
         servo_position(RIGHT);  
-        float distanceRight = ping();
+        float  distanceRight = ping();
         Serial.print("Right: ");
         Serial.print(distanceRight);
         Serial.println("cm");
