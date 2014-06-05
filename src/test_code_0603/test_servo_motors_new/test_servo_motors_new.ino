@@ -49,7 +49,7 @@ int throttle = 0;
 //* Coolness
 //********************
 int timeToGetCool = 0;
-#define VICTORY   10
+#define VICTORY   50
 
 //**************************************************************************************************************
 //*
@@ -270,23 +270,26 @@ void coolness(){
   // right 3
   motor2.run(BACKWARD);
   motor1.run(FORWARD);
-  delay(ROTATE_ACT_TIME*3);
+  delay(ROTATE_ACT_TIME*4);
   delay(30);
   // left 3
   motor1.run(BACKWARD);
   motor2.run(FORWARD);
-  delay(ROTATE_ACT_TIME*3);
+  delay(ROTATE_ACT_TIME*4);
   delay(30);
+  for (int i=0; i<5 ; i++)
+  {
   //right
   motor2.run(BACKWARD);
   motor1.run(FORWARD);
-  delay(ROTATE_ACT_TIME/3);
+  delay(ROTATE_ACT_TIME/2);
   delay(30);
   //left
   motor1.run(BACKWARD);
   motor2.run(FORWARD);
-  delay(ROTATE_ACT_TIME/3);
+  delay(ROTATE_ACT_TIME/2);
   delay(30);
+  }
   //stop
   freewheel();
   delay(100);
