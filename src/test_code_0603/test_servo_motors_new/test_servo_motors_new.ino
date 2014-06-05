@@ -207,6 +207,7 @@ void rotate_left(){
   motor2.run(FORWARD);
   delay(ROTATE_ACT_TIME-125);
   freewheel();
+  delay(100);
 }
 
 void rotate_right(){
@@ -214,6 +215,7 @@ void rotate_right(){
   motor1.run(FORWARD);
   delay(ROTATE_ACT_TIME-125);
   freewheel();
+  delay(100);
 }
 
 void u_turn(){
