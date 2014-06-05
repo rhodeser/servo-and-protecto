@@ -93,16 +93,13 @@ void setup() {
 
 void loop() {
 
-  //float distanceForward = ping();
-  //delay(500);
-  //if (distanceForward > dangerThreshold) //if path is clear
   if (scanClear())
   {
     drive_forward();
   }
   else // if path is blocked
   {
-    //brake();   
+  
     freewheel();
 
 
