@@ -312,7 +312,7 @@ bool scanClear(){
       if (lowValue)
       {
         clear = false;
-        if (angleVectors[i].distance <= 10) // if too close abort
+        if (angleVectors[i].distance <= 15) // if too close abort
         {
           return clear;
         }
@@ -382,11 +382,14 @@ void scan(){
   for(int i = 0; i < READINGS; i++){     // loop to sweep the servo (& sensor)    
     angleVectors[i].distance = ping();
       
-    if (angleVectors[i].distance <= 10) // if too close abort
+    if (angleVectors[i].distance <= 15) // if too close abort
     {
-      //ultrasonicServo.write(CENTER); // set servo to face the starting point
-      //return;
       angleVectors[i].distance = ping(); // ping again to make sure it is not bogus value
+      if (angleVectors[i].distance <= 15) // if too close abort
+      {
+        ultrasonicServo.write(CENTER); // set servo to face the starting point
+        return;                        // quit
+      }
     }
     ultrasonicServo.write(angleVectors[i].angle); // set servo position
     delay(35); // wait 30 milliseconds for servo to reach position
