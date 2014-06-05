@@ -12,8 +12,8 @@ NewPing sonar(TRIG_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pin and max
 
 float dangerThreshold = 25.0; // 25 cm - depends on the floor surface and speed setting
 
-#define COLLISION_DISTANCE 40 // in cm - depends on what we want
-#define AVOIDANCE_DISTANCE 60
+#define COLLISION_DISTANCE 60 // in cm - depends on what we want
+#define AVOIDANCE_DISTANCE 100
 //************************************************************ 
 //* Servo
 //************************************************************
@@ -76,11 +76,9 @@ void setup() {
   servo_position(CENTER);  
 
   // setup motors
-  throttle = 190;//SLOW;
+  throttle = 190; //SLOW;
   setSpeed(throttle);
   //freewheel();
-  drive_forward();
-  delay(1000);
 }
 //*************************************************************
 //* Main
@@ -127,7 +125,6 @@ void loop() {
       delay(400);
       
       // rotate left
-      //veer_left();
       rotate_left();
     }
     else if (distanceRight > distanceLeft && distanceRight > dangerThreshold) //if right is less obstructed 
@@ -137,7 +134,6 @@ void loop() {
       delay(400);
 
       // rotate right
-      //veer_right();
       rotate_right();
     }
     else // equally blocked or less than danger threshold left or right
@@ -212,7 +208,7 @@ void rotate_left(){
   motor2.run(FORWARD);
   delay(ROTATE_ACT_TIME-180);
   freewheel();
-  increaseMotorSpeed(throttle, MOTORLEFT);
+  //increaseMotorSpeed(throttle, MOTORLEFT);
   delay(100);
 }
 
@@ -221,7 +217,7 @@ void rotate_right(){
   motor1.run(FORWARD);
   delay(ROTATE_ACT_TIME-180);
   freewheel();
-  increaseMotorSpeed(throttle, MOTORRIGHT);
+  //increaseMotorSpeed(throttle, MOTORRIGHT);
   delay(100);
 }
 
@@ -240,15 +236,15 @@ void drive_backward(){
 void veer_left(){
   motor1.run(RELEASE);
   motor2.run(FORWARD);
-  delay(TURN_ACT_TIME);
-  freewheel();
+  delay(TURN_ACT_TIME/2);
+  //freewheel();
 }
 
 void veer_right(){
   motor2.run(RELEASE);
   motor1.run(FORWARD);
-  delay(TURN_ACT_TIME);
-  freewheel();
+  delay(TURN_ACT_TIME/2);
+  //freewheel();
 }
 
 //**************************************************************************************************************
@@ -326,14 +322,14 @@ bool scanClear(){
     int leftDistance = averageLeftDistance();
     int rightDistance = averageRightDistance();
     if (leftDistance < AVOIDANCE_DISTANCE && rightDistance > AVOIDANCE_DISTANCE){
-      //veer_right(); 
-      rotate_right();
-      rotate_right();
+      veer_right(); 
+      //rotate_right();
+      //rotate_right();
     }
     else if (rightDistance < AVOIDANCE_DISTANCE && leftDistance > AVOIDANCE_DISTANCE){
-      //veer_left(); 
-      rotate_left();
-      rotate_left();
+      veer_left(); 
+      //rotate_left();
+      //rotate_left();
     }      
   }
 
