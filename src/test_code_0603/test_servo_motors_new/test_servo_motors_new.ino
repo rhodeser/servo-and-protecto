@@ -10,9 +10,9 @@
 
 NewPing sonar(TRIG_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pin and maximum distance.
 
-float dangerThreshold = 50.0; // 25 cm - depends on the floor surface and speed setting
+float dangerThreshold = 25.0; // 25 cm - depends on the floor surface and speed setting
 
-#define COLLISION_DISTANCE 50 // in cm - depends on what we want
+#define COLLISION_DISTANCE 40 // in cm - depends on what we want
 #define AVOIDANCE_DISTANCE 60
 //************************************************************ 
 //* Servo
@@ -102,23 +102,6 @@ void loop() {
     //brake();   
     freewheel();
 
-    // look left
-    // servo_position(LEFT);  
-    //delay(500);
-    //float distanceLeft = ping();
-    //Serial.print("Left: ");
-    //Serial.print(distanceLeft);
-    //Serial.println("cm");
-
-
-    // look right
-    //delay(500);
-    // servo_position(RIGHT);  
-    //float  distanceRight = ping();
-    //Serial.print("Right: ");
-    //Serial.print(distanceRight);
-    //Serial.println("cm");
-    //delay(500);
 
     // look left
     lookLeft();
