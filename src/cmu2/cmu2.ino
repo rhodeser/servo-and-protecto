@@ -28,7 +28,7 @@
 #define LED_BLINK 5 // 5 Hz
 #define WAIT_TIME 5000 // 5 seconds
 
-CMUcam4 cam(CMUCOM4_SERIAL);
+CMUcam4 cam(CMUCOM4_SERIAL3);
 
 void setup()
 {
@@ -38,7 +38,7 @@ void setup()
   {
   cam.LEDOff();
   delay(5000); 
-  cam.LEDOn(15);
+  cam.LEDOn(1);
   delay(2000);
   }
   /*Serial.begin(115200);
@@ -66,7 +66,7 @@ void loop()
   {
 
     cam.trackColor(RED_MIN, RED_MAX, GREEN_MIN, GREEN_MAX, BLUE_MIN, BLUE_MAX);
-    cam.sendBitmap(&data);
+    //cam.sendBitmap(&data);
     cam.getTypeTDataPacket(&data); // Get a tracking packet.
     delay(1000);
     /*

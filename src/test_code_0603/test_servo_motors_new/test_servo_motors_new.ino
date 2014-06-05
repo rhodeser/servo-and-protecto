@@ -73,7 +73,7 @@ void setup() {
   servo_position(CENTER);  
 
   // setup motors
-  throttle = SLOW;
+  throttle = 190;//SLOW;
   setSpeed(throttle);
   //freewheel();
 }
