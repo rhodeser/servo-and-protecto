@@ -257,7 +257,7 @@ void veer_right(){
 //Changed Motor speed for right turn, doing right turn only, changed detection collision zone time
 #define MIN(a, b) (a < b ? a : b)
 
-#define SPEED_OFFSET -23 // this offset is specific to your motor set - adjust till you get a straight path
+#define SPEED_OFFSET -8// this offset is specific to your motor set - adjust till you get a straight path
 
 #define SPEED_CHANGE_TIME 10 // time in milliseconds to react
 
