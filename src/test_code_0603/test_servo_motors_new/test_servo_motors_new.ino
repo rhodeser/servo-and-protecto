@@ -124,7 +124,8 @@ void loop() {
       delay(200);
       //}
       // rotate left
-      rotate_left();
+      //rotate_left();
+      veer_left();
     }
     else if (distanceRight > distanceLeft && distanceRight > dangerThreshold) //if right is less obstructed 
     {
@@ -135,7 +136,8 @@ void loop() {
       delay(200);
       //}
       // rotate right
-      rotate_right();
+      //rotate_right();
+      veer_right();
     }
     else // equally blocked or less than danger threshold left or right
     {
@@ -234,15 +236,15 @@ void drive_backward(){
 void veer_left(){
   motor1.run(RELEASE);
   motor2.run(FORWARD);
-  delay(TURN_ACT_TIME/3);
-  freewheel();
+  //delay(TURN_ACT_TIME/3);
+  //freewheel();
 }
 
 void veer_right(){
   motor2.run(RELEASE);
   motor1.run(FORWARD);
-  delay(TURN_ACT_TIME/3);
-  freewheel();
+  //delay(TURN_ACT_TIME/3);
+  //freewheel();
 }
 
 //**************************************************************************************************************
