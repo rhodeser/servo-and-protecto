@@ -80,6 +80,7 @@ void setup() {
   setSpeed(throttle);
   //freewheel();
   drive_forward();
+  delay(1000);
 }
 //*************************************************************
 //* Main
@@ -341,11 +342,11 @@ bool scanClear(){
 
 void lookForward(){
   // set up the reading angles for the servo
-  angleVectors[0].angle = 70;
-  angleVectors[1].angle = 80;
-  angleVectors[2].angle = 90;
-  angleVectors[3].angle = 100;
-  angleVectors[4].angle = 110;
+  angleVectors[0].angle = 100;
+  angleVectors[1].angle = 110;
+  angleVectors[2].angle = 120;
+  angleVectors[3].angle = 130;
+  angleVectors[4].angle = 140;
   ultrasonicServo.write(angleVectors[0].angle); // set servo to face the starting point
   delay(300); // wait 100 milliseconds for servo to reach position
   scan();
@@ -380,14 +381,15 @@ void scan(){
 
   for(int i = 0; i < READINGS; i++){     // loop to sweep the servo (& sensor)    
     angleVectors[i].distance = ping();
-    ultrasonicServo.write(angleVectors[i].angle); // set servo position
-    delay(35); // wait 30 milliseconds for servo to reach position
-    
+      
     if (angleVectors[i].distance <= 10) // if too close abort
     {
-      ultrasonicServo.write(CENTER); // set servo to face the starting point
-      return;
+      //ultrasonicServo.write(CENTER); // set servo to face the starting point
+      //return;
+      angleVectors[i].distance = ping(); // ping again to make sure it is not bogus value
     }
+    ultrasonicServo.write(angleVectors[i].angle); // set servo position
+    delay(35); // wait 30 milliseconds for servo to reach position
   }
   ultrasonicServo.write(CENTER); // set servo to face the starting point
   delay(35);
