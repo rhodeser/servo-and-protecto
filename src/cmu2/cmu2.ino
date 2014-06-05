@@ -34,6 +34,13 @@ void setup()
 {
   int a;
   a = cam.begin();
+  if (a<0)
+  {
+  cam.LEDOff();
+  delay(5000); 
+  cam.LEDOn(15);
+  delay(2000);
+  }
   /*Serial.begin(115200);
   Serial.print(a);
   Serial.print("Starting the camera\n");
