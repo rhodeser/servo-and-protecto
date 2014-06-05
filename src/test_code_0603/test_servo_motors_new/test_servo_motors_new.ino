@@ -10,10 +10,10 @@
 
 NewPing sonar(TRIG_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pin and maximum distance.
 
-float dangerThreshold = 30.0; // 25 cm - depends on the floor surface and speed setting
+float dangerThreshold = 50.0; // 25 cm - depends on the floor surface and speed setting
 
-#define COLLISION_DISTANCE 30 // in cm - depends on what we want
-#define AVOIDANCE_DISTANCE 50
+#define COLLISION_DISTANCE 50 // in cm - depends on what we want
+#define AVOIDANCE_DISTANCE 60
 //************************************************************ 
 //* Servo
 //************************************************************
@@ -343,7 +343,7 @@ void lookForward(){
   angleVectors[3].angle = 110;
   angleVectors[4].angle = 120;
   ultrasonicServo.write(angleVectors[0].angle); // set servo to face the starting point
-  delay(100); // wait 100 milliseconds for servo to reach position
+  delay(300); // wait 100 milliseconds for servo to reach position
   scan();
 } 
 
@@ -355,7 +355,7 @@ void lookLeft(){
   angleVectors[3].angle = 170;
   angleVectors[4].angle = 180;
   ultrasonicServo.write(angleVectors[0].angle); // set servo to face the starting point
-  delay(100); // wait 100 milliseconds for servo to reach position
+  delay(300); // wait 100 milliseconds for servo to reach position
   scan();
 }  
 
@@ -367,7 +367,7 @@ void lookRight(){
   angleVectors[3].angle = 30;
   angleVectors[4].angle = 40;
   ultrasonicServo.write(angleVectors[0].angle); // set servo to face the starting point
-  delay(100); // wait 100 milliseconds for servo to reach position
+  delay(500); // wait 100 milliseconds for servo to reach position
   scan();
 }  
 
