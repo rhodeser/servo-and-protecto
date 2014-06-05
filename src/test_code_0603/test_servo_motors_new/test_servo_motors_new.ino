@@ -117,26 +117,20 @@ void loop() {
 
     if (distanceLeft > distanceRight && distanceLeft > dangerThreshold)       //if left is less obstructed 
     {
-      // Check if we are too close to the obstacle
-      //if (distanceLeft < 10.0)
-      //{
+ 
       drive_backward();
-      delay(200);
-      //}
+      delay(400);
+      
       // rotate left
-      //rotate_left();
       veer_left();
     }
     else if (distanceRight > distanceLeft && distanceRight > dangerThreshold) //if right is less obstructed 
     {
-      // Check if we are too close to the obstacle
-      //if (distanceRight < 10.0)
-      //{
+
       drive_backward();
-      delay(200);
-      //}
+      delay(400);
+
       // rotate right
-      //rotate_right();
       veer_right();
     }
     else // equally blocked or less than danger threshold left or right
@@ -214,7 +208,6 @@ void rotate_left(){
 }
 
 void rotate_right(){
-  //changespeed(MEDIUM);
   motor2.run(BACKWARD);
   motor1.run(FORWARD);
   delay(ROTATE_ACT_TIME);
@@ -236,15 +229,15 @@ void drive_backward(){
 void veer_left(){
   motor1.run(RELEASE);
   motor2.run(FORWARD);
-  //delay(TURN_ACT_TIME/3);
-  //freewheel();
+  delay(ROTATE_ACT_TIME);
+  freewheel();
 }
 
 void veer_right(){
   motor2.run(RELEASE);
   motor1.run(FORWARD);
-  //delay(TURN_ACT_TIME/3);
-  //freewheel();
+  delay(ROTATE_ACT_TIME);
+  freewheel();
 }
 
 //**************************************************************************************************************
