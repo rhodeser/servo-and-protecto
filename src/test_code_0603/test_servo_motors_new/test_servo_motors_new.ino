@@ -45,6 +45,11 @@ AF_DCMotor motor2(2, MOTOR12_1KHZ);
 int throttle = 0;
 // used to balance power across wheels
 
+//********************
+//* Coolness
+//********************
+int timeToGetCool = 0;
+#define VICTORY   10
 
 //**************************************************************************************************************
 //*
@@ -93,6 +98,17 @@ void setup() {
 
 void loop() {
 
+  timeToGetCool++;
+  
+  if (timeToGetCool == VICTORY)
+  {
+    // Begin coolness
+    coolness();
+    // reset timer
+    timeToGetCool = 0;
+  }
+  else
+  {
   if (scanClear())
   {
     drive_forward();
@@ -141,7 +157,8 @@ void loop() {
       delay(500);
       u_turn();
     }   
-  }   
+  } 
+  }  
 
 }
 
@@ -242,6 +259,37 @@ void veer_right(){
   motor1.run(FORWARD);
   delay(TURN_ACT_TIME/2);
   //freewheel();
+}
+
+void coolness(){
+  //back-up
+  freewheel();
+  delay(20);
+  drive_backward();
+  delay(500);
+  // right 3
+  motor2.run(BACKWARD);
+  motor1.run(FORWARD);
+  delay(ROTATE_ACT_TIME*3);
+  delay(30);
+  // left 3
+  motor1.run(BACKWARD);
+  motor2.run(FORWARD);
+  delay(ROTATE_ACT_TIME*3);
+  delay(30);
+  //right
+  motor2.run(BACKWARD);
+  motor1.run(FORWARD);
+  delay(ROTATE_ACT_TIME/3);
+  delay(30);
+  //left
+  motor1.run(BACKWARD);
+  motor2.run(FORWARD);
+  delay(ROTATE_ACT_TIME/3);
+  delay(30);
+  //stop
+  freewheel();
+  delay(100);
 }
 
 //**************************************************************************************************************
