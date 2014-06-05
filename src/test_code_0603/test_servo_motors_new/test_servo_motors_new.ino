@@ -39,6 +39,9 @@ AF_DCMotor motor2(2, MOTOR12_1KHZ);
 #define MEDIUM 230
 #define MAXSPEED 255
 
+#define MOTORLEFT      0
+#define MOTORRIGHT     1
+
 int throttle = 0;
 // used to balance power across wheels
 
@@ -76,6 +79,7 @@ void setup() {
   throttle = 190;//SLOW;
   setSpeed(throttle);
   //freewheel();
+  drive_forward();
 }
 //*************************************************************
 //* Main
@@ -205,23 +209,25 @@ void brake(){ // this will require a modded AFMOTOR
 void rotate_left(){
   motor1.run(BACKWARD);
   motor2.run(FORWARD);
-  delay(ROTATE_ACT_TIME-125);
+  delay(ROTATE_ACT_TIME-180);
   freewheel();
+  increaseMotorSpeed(throttle, MOTORLEFT);
   delay(100);
 }
 
 void rotate_right(){
   motor2.run(BACKWARD);
   motor1.run(FORWARD);
-  delay(ROTATE_ACT_TIME-125);
+  delay(ROTATE_ACT_TIME-180);
   freewheel();
+  increaseMotorSpeed(throttle, MOTORRIGHT);
   delay(100);
 }
 
 void u_turn(){
   motor2.run(BACKWARD);
   motor1.run(FORWARD);
-  delay(UTURN_ACT_TIME); // twice as long as rotate right to end up 180 degrees around
+  delay(UTURN_ACT_TIME-250); // twice as long as rotate right to end up 180 degrees around
   freewheel();
 }
 
@@ -257,6 +263,7 @@ void veer_right(){
 #define MIN(a, b) (a < b ? a : b)
 
 #define SPEED_OFFSET -10// this offset is specific to your motor set - adjust till you get a straight path
+#define EXTRA_SPEED  10
 
 #define SPEED_CHANGE_TIME 10 // time in milliseconds to react
 
@@ -264,6 +271,19 @@ void setSpeed(int speed){
   motor1.setSpeed(speed+SPEED_OFFSET);
   motor2.setSpeed(speed);
   delay(SPEED_CHANGE_TIME);
+}
+
+void increaseMotorSpeed(int speed, boolean motor){
+    
+  if (motor == MOTORLEFT)    // give the left motor a little more speed
+  {
+    motor1.setSpeed(speed + EXTRA_SPEED);
+  }
+  else
+  {
+    motor2.setSpeed(speed + EXTRA_SPEED);
+  }
+    delay(SPEED_CHANGE_TIME);
 }
 
 //*************************************************************************************************************
@@ -307,9 +327,11 @@ bool scanClear(){
     if (leftDistance < AVOIDANCE_DISTANCE && rightDistance > AVOIDANCE_DISTANCE){
       //veer_right(); 
       rotate_right();
+      rotate_right();
     }
     else if (rightDistance < AVOIDANCE_DISTANCE && leftDistance > AVOIDANCE_DISTANCE){
       //veer_left(); 
+      rotate_left();
       rotate_left();
     }      
   }
@@ -319,11 +341,11 @@ bool scanClear(){
 
 void lookForward(){
   // set up the reading angles for the servo
-  angleVectors[0].angle = 80;
-  angleVectors[1].angle = 90;
-  angleVectors[2].angle = 100;
-  angleVectors[3].angle = 110;
-  angleVectors[4].angle = 120;
+  angleVectors[0].angle = 70;
+  angleVectors[1].angle = 80;
+  angleVectors[2].angle = 90;
+  angleVectors[3].angle = 100;
+  angleVectors[4].angle = 110;
   ultrasonicServo.write(angleVectors[0].angle); // set servo to face the starting point
   delay(300); // wait 100 milliseconds for servo to reach position
   scan();
@@ -347,7 +369,7 @@ void lookRight(){
   angleVectors[1].angle = 10;
   angleVectors[2].angle = 20;
   angleVectors[3].angle = 30;
-  angleVectors[4].angle = 40;
+  angleVectors[4].angle = 40;  
   ultrasonicServo.write(angleVectors[0].angle); // set servo to face the starting point
   delay(500); // wait 100 milliseconds for servo to reach position
   scan();
