@@ -425,8 +425,6 @@ void scan(){
 
   for(int i = 0; i < READINGS; i++){     // loop to sweep the servo (& sensor) 
   
-    ultrasonicServo.write(angleVectors[i].angle); // set servo position
-    delay(35); // wait 30 milliseconds for servo to reach position  
     angleVectors[i].distance = ping();
       
     if (angleVectors[i].distance <= 15) // if too close abort
@@ -438,6 +436,9 @@ void scan(){
         return;                        // quit
       }
     }
+    
+    ultrasonicServo.write(angleVectors[i].angle); // set servo position
+    delay(35); // wait 30 milliseconds for servo to reach position  
   }
   ultrasonicServo.write(CENTER); // set servo to face the starting point
   delay(35);
