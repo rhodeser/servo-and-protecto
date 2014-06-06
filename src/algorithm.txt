@@ -50,13 +50,25 @@ main loop
     get movement choice
 
 
-Roy,
-I've updated the project proposal and uploaded it on d2l.  
-Unfortunately the first kit we picked will not arrive in time.
-Despite the guarantee of 24 hour shipping to the US, it will actually
-take 2-3 weeks.  I quickly ordered a similar product, which is linked 
-in the project proposal. It will arrive tomorrow or Wednesday, so I'm sure we'll
-have at least something for the progress report (we're working on the algorithms
-right now anyway).
+//includes, #defines, void setup(), ...
+
+#include <Servo.h>
+
+#define
+/* brightness, speed, motors, delays, pins
+ 
+setup()
+//initialize PWM, servo control, sonar, cmucam
+setmotorspeed()
+//depending on terrain (carpet, floor), set speed
+seterrormargin()
+//depending on brightness conditions
+
+turnleft(), turnright(), etc.
+//correct combination of motor movements
+
+
+
+void loop()
 
 
