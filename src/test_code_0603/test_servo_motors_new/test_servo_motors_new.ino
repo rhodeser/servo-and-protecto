@@ -12,8 +12,8 @@ NewPing sonar(TRIG_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pin and max
 
 float dangerThreshold = 25.0; // 25 cm - depends on the floor surface and speed setting
 
-#define COLLISION_DISTANCE 25 // in cm - depends on what we want
-#define AVOIDANCE_DISTANCE 40
+#define COLLISION_DISTANCE 60 // in cm - depends on what we want
+#define AVOIDANCE_DISTANCE 100
 //************************************************************ 
 //* Servo
 //************************************************************
@@ -39,9 +39,17 @@ AF_DCMotor motor2(2, MOTOR12_1KHZ);
 #define MEDIUM 230
 #define MAXSPEED 255
 
+#define MOTORLEFT      0
+#define MOTORRIGHT     1
+
 int throttle = 0;
 // used to balance power across wheels
 
+//********************
+//* Coolness
+//********************
+int timeToGetCool = 0;
+#define VICTORY   50
 
 //**************************************************************************************************************
 //*
@@ -73,7 +81,7 @@ void setup() {
   servo_position(CENTER);  
 
   // setup motors
-  throttle = SLOW;
+  throttle = 190; //SLOW;
   setSpeed(throttle);
   //freewheel();
 }
@@ -90,35 +98,26 @@ void setup() {
 
 void loop() {
 
-  //float distanceForward = ping();
-  //delay(500);
-  //if (distanceForward > dangerThreshold) //if path is clear
+  timeToGetCool++;
+  
+  if (timeToGetCool == VICTORY)
+  {
+    // Begin coolness
+    coolness();
+    // reset timer
+    timeToGetCool = 0;
+  }
+  else
+  {
   if (scanClear())
   {
     drive_forward();
   }
   else // if path is blocked
   {
-    //brake();   
+  
     freewheel();
 
-    // look left
-    // servo_position(LEFT);  
-    //delay(500);
-    //float distanceLeft = ping();
-    //Serial.print("Left: ");
-    //Serial.print(distanceLeft);
-    //Serial.println("cm");
-
-
-    // look right
-    //delay(500);
-    // servo_position(RIGHT);  
-    //float  distanceRight = ping();
-    //Serial.print("Right: ");
-    //Serial.print(distanceRight);
-    //Serial.println("cm");
-    //delay(500);
 
     // look left
     lookLeft();
@@ -134,23 +133,19 @@ void loop() {
 
     if (distanceLeft > distanceRight && distanceLeft > dangerThreshold)       //if left is less obstructed 
     {
-      // Check if we are too close to the obstacle
-      //if (distanceLeft < 10.0)
-      //{
+ 
       drive_backward();
-      delay(200);
-      //}
+      delay(400);
+      
       // rotate left
       rotate_left();
     }
     else if (distanceRight > distanceLeft && distanceRight > dangerThreshold) //if right is less obstructed 
     {
-      // Check if we are too close to the obstacle
-      //if (distanceRight < 10.0)
-      //{
+
       drive_backward();
-      delay(200);
-      //}
+      delay(400);
+
       // rotate right
       rotate_right();
     }
@@ -162,7 +157,8 @@ void loop() {
       delay(500);
       u_turn();
     }   
-  }   
+  } 
+  }  
 
 }
 
@@ -224,22 +220,25 @@ void brake(){ // this will require a modded AFMOTOR
 void rotate_left(){
   motor1.run(BACKWARD);
   motor2.run(FORWARD);
-  delay(ROTATE_ACT_TIME);
+  delay(ROTATE_ACT_TIME-180);
   freewheel();
+  //increaseMotorSpeed(throttle, MOTORLEFT);
+  delay(100);
 }
 
 void rotate_right(){
-  //changespeed(MEDIUM);
   motor2.run(BACKWARD);
   motor1.run(FORWARD);
-  delay(ROTATE_ACT_TIME);
+  delay(ROTATE_ACT_TIME-180);
   freewheel();
+  //increaseMotorSpeed(throttle, MOTORRIGHT);
+  delay(100);
 }
 
 void u_turn(){
   motor2.run(BACKWARD);
   motor1.run(FORWARD);
-  delay(UTURN_ACT_TIME); // twice as long as rotate right to end up 180 degrees around
+  delay(UTURN_ACT_TIME-250); // twice as long as rotate right to end up 180 degrees around
   freewheel();
 }
 
@@ -251,15 +250,49 @@ void drive_backward(){
 void veer_left(){
   motor1.run(RELEASE);
   motor2.run(FORWARD);
-  delay(TURN_ACT_TIME/3);
-  freewheel();
+  delay(TURN_ACT_TIME/2);
+  //freewheel();
 }
 
 void veer_right(){
   motor2.run(RELEASE);
   motor1.run(FORWARD);
-  delay(TURN_ACT_TIME/3);
+  delay(TURN_ACT_TIME/2);
+  //freewheel();
+}
+
+void coolness(){
+  //back-up
   freewheel();
+  delay(20);
+  drive_backward();
+  delay(500);
+  // right 3
+  motor2.run(BACKWARD);
+  motor1.run(FORWARD);
+  delay(ROTATE_ACT_TIME*4);
+  delay(30);
+  // left 3
+  motor1.run(BACKWARD);
+  motor2.run(FORWARD);
+  delay(ROTATE_ACT_TIME*4);
+  delay(30);
+  for (int i=0; i<5 ; i++)
+  {
+  //right
+  motor2.run(BACKWARD);
+  motor1.run(FORWARD);
+  delay(ROTATE_ACT_TIME/2);
+  delay(30);
+  //left
+  motor1.run(BACKWARD);
+  motor2.run(FORWARD);
+  delay(ROTATE_ACT_TIME/2);
+  delay(30);
+  }
+  //stop
+  freewheel();
+  delay(100);
 }
 
 //**************************************************************************************************************
@@ -274,7 +307,8 @@ void veer_right(){
 //Changed Motor speed for right turn, doing right turn only, changed detection collision zone time
 #define MIN(a, b) (a < b ? a : b)
 
-#define SPEED_OFFSET -23 // this offset is specific to your motor set - adjust till you get a straight path
+#define SPEED_OFFSET -10// this offset is specific to your motor set - adjust till you get a straight path
+#define EXTRA_SPEED  10
 
 #define SPEED_CHANGE_TIME 10 // time in milliseconds to react
 
@@ -282,6 +316,19 @@ void setSpeed(int speed){
   motor1.setSpeed(speed+SPEED_OFFSET);
   motor2.setSpeed(speed);
   delay(SPEED_CHANGE_TIME);
+}
+
+void increaseMotorSpeed(int speed, boolean motor){
+    
+  if (motor == MOTORLEFT)    // give the left motor a little more speed
+  {
+    motor1.setSpeed(speed + EXTRA_SPEED);
+  }
+  else
+  {
+    motor2.setSpeed(speed + EXTRA_SPEED);
+  }
+    delay(SPEED_CHANGE_TIME);
 }
 
 //*************************************************************************************************************
@@ -309,7 +356,10 @@ bool scanClear(){
       if (lowValue)
       {
         clear = false;
-        //return clear;
+        if (angleVectors[i].distance <= 15) // if too close abort
+        {
+          return clear;
+        }
       }
     }
   }
@@ -321,9 +371,13 @@ bool scanClear(){
     int rightDistance = averageRightDistance();
     if (leftDistance < AVOIDANCE_DISTANCE && rightDistance > AVOIDANCE_DISTANCE){
       veer_right(); 
+      //rotate_right();
+      //rotate_right();
     }
     else if (rightDistance < AVOIDANCE_DISTANCE && leftDistance > AVOIDANCE_DISTANCE){
       veer_left(); 
+      //rotate_left();
+      //rotate_left();
     }      
   }
 
@@ -332,13 +386,13 @@ bool scanClear(){
 
 void lookForward(){
   // set up the reading angles for the servo
-  angleVectors[0].angle = 80;
-  angleVectors[1].angle = 90;
-  angleVectors[2].angle = 100;
-  angleVectors[3].angle = 110;
-  angleVectors[4].angle = 120;
+  angleVectors[0].angle = 100;
+  angleVectors[1].angle = 110;
+  angleVectors[2].angle = 120;
+  angleVectors[3].angle = 130;
+  angleVectors[4].angle = 140;
   ultrasonicServo.write(angleVectors[0].angle); // set servo to face the starting point
-  delay(300); // wait 300 milliseconds for servo to reach position
+  delay(300); // wait 100 milliseconds for servo to reach position
   scan();
 } 
 
@@ -350,7 +404,7 @@ void lookLeft(){
   angleVectors[3].angle = 170;
   angleVectors[4].angle = 180;
   ultrasonicServo.write(angleVectors[0].angle); // set servo to face the starting point
-  delay(300); // wait 300 milliseconds for servo to reach position
+  delay(300); // wait 100 milliseconds for servo to reach position
   scan();
 }  
 
@@ -360,19 +414,30 @@ void lookRight(){
   angleVectors[1].angle = 10;
   angleVectors[2].angle = 20;
   angleVectors[3].angle = 30;
-  angleVectors[4].angle = 40;
+  angleVectors[4].angle = 40;  
   ultrasonicServo.write(angleVectors[0].angle); // set servo to face the starting point
-  delay(500); // wait 500 milliseconds for servo to reach position
+  delay(500); // wait 100 milliseconds for servo to reach position
   scan();
 }  
 
 
 void scan(){
 
-  for(int i = 0; i < READINGS; i++){     // loop to sweep the servo (& sensor)    
-    angleVectors[i].distance = ping();
+  for(int i = 0; i < READINGS; i++){     // loop to sweep the servo (& sensor) 
+  
     ultrasonicServo.write(angleVectors[i].angle); // set servo position
-    delay(35); // wait 30 milliseconds for servo to reach position
+    delay(35); // wait 30 milliseconds for servo to reach position  
+    angleVectors[i].distance = ping();
+      
+    if (angleVectors[i].distance <= 15) // if too close abort
+    {
+      angleVectors[i].distance = ping(); // ping again to make sure it is not bogus value
+      if (angleVectors[i].distance <= 15) // if too close abort
+      {
+        ultrasonicServo.write(CENTER); // set servo to face the starting point
+        return;                        // quit
+      }
+    }
   }
   ultrasonicServo.write(CENTER); // set servo to face the starting point
   delay(35);
