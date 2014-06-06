@@ -16,88 +16,56 @@
 #include <CMUcam4.h>
 #include <CMUcom4.h>
 
-#define RED_MIN 180
-#define RED_MAX 256
-#define GREEN_MIN 180
+#define RED_MIN 230
+#define RED_MAX 255
+#define GREEN_MIN 230
 #define GREEN_MAX 255
-#define BLUE_MIN 180
+#define BLUE_MIN 230
 #define BLUE_MAX 255
-#define PIXELS_THRESHOLD 0 // The percent of tracked pixels needs to be greater than this 0=0% - 255=100%.
-#define CONFIDENCE_THRESHOLD 40 // The percent of tracked pixels in the bounding box needs to be greater than this 0=0% - 255=100%.
 
 #define LED_BLINK 5 // 5 Hz
 #define WAIT_TIME 5000 // 5 seconds
 
-CMUcam4 cam(CMUCOM4_SERIAL3);
+CMUcam4 cam(CMUCOM4_SERIAL1);
+CMUcom4 com(CMUCOM4_SERIAL);
+int val;
 
 void setup()
 {
-  int a;
-  a = cam.begin();
-  if (a<0)
-  {
-  cam.LEDOff();
-  delay(5000); 
-  cam.LEDOn(1);
-  delay(2000);
-  }
-  /*Serial.begin(115200);
-  Serial.print(a);
-  Serial.print("Starting the camera\n");
-  */
+  cam.begin();
+  com.begin(9600);
   // Wait for auto gain and auto white balance to run.
 
   cam.LEDOn(LED_BLINK);
   delay(WAIT_TIME);
+  
+  //Serial.begin(19200);
+  Serial.print("WE ARE HERE!\n");
 
   // Turn auto gain and auto white balance off.
 
   cam.autoGainControl(false);
   cam.autoWhiteBalance(false);
- // cam.colorTracking(false);
+
   cam.LEDOn(CMUCAM4_LED_ON);
 }
 
 void loop()
 {
-  CMUcam4_tracking_data_t data;
-  //cam.trackColor(RED_MIN, RED_MAX, GREEN_MIN, GREEN_MAX, BLUE_MIN, BLUE_MAX);
+  CMUcam4_tracking_data_t t_data;
+
+  cam.pollMode(true);
+
   for(;;)
   {
-
     cam.trackColor(RED_MIN, RED_MAX, GREEN_MIN, GREEN_MAX, BLUE_MIN, BLUE_MAX);
-    //cam.sendBitmap(&data);
-    cam.getTypeTDataPacket(&data); // Get a tracking packet.
-    delay(1000);
-    /*
-    Serial.print("pixels\n");
-    Serial.print(data.pixels);
-    Serial.println();
-    Serial.print("confidence\n");   
-    Serial.print(data.confidence);
-    Serial.println();
-    */
-    cam.LEDOn(1);
-    if (data.pixels > PIXELS_THRESHOLD)
-    {
-        if(data.confidence > CONFIDENCE_THRESHOLD) // The pixels we are tracking are in a dense clump - so maybe they are a single object.
-            {
-              cam.LEDOn(5);
-              cam.LEDOn(5);
-              //Serial.println();
-              //Serial.print("Found bright color\n");
-            }
-       // else Serial.print("Within Pixels threshold but not confidence\n");
-    }
-    else 
-    {
-    cam.LEDOn(3);
-    delay(1000);
-    cam.LEDOn(6);
-    }
-    //Serial.print("You fucked up\n");
+    val = cam.getTypeTDataPacket(&t_data); // Get a tracking packet.
+
+    // Process the packet data safely here.
+      Serial.print("POLLING... val is\n");
+      Serial.print(val);
+      //com.write(val);
   }
-  
 
   // Do something else here.
 }
