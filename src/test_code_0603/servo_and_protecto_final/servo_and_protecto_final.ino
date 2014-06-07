@@ -499,6 +499,11 @@ void scan(){
 //*
 //* look Functions
 //*
+//* Note: The angles are chosen relative to the sonar position on top of the servo.
+//*       Can be modified depending on the center position of the servo and the center position of the sonar.
+//*       For the lookForward() function, 100-140 scans in front of the bot.
+//*       For the lookLeft() function 140-180 scans to the left of the bot.
+//*       For the lookRight() function 0-40 scans to the right of the bot.
 //**************************************************************************************************************
 
 void lookForward(){
