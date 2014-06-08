@@ -1,0 +1,108 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+
+%% load up the fancy box making package
+\RequirePackage{fancybox}
+\RequirePackage{graphicx}
+\RequirePackage{float}
+\usepackage[colorlinks=true,linkcolor=black, urlcolor=black]{hyperref}
+\RequirePackage[letterpaper, portrait, margin=1.0in]{geometry}
+
+%% Load up fancy headers and footers package
+\RequirePackage{fancyhdr}
+
+%% now reset the headers and footers
+\fancyhead{}
+\fancyfoot{}
+% Header/footer Thickness
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Side by Side Pictures Param1: Graphic insert, Param2: Caption for Graphic1, Param3:Label for Graphic1, Param4: Graphic insert, Param5:Caption for Graphic2, Param6:Graphic2 label
+%\newcommand{\picsidebyside}[6]{\begin{figure}[ht]            
+%\begin{minipage}[b]{0.5\linewidth}
+%\centering
+%#1
+%\caption{#2}
+%\label{#3}
+%\end{minipage}
+%\hspace{0.5cm}
+%\begin{minipage}[b]{0.5\linewidth}
+%\centering
+%#4 
+%\caption{#5}
+%\label{#6}
+%\end{minipage}
+%\end{figure}}
+
+% Center Image Command
+\newcommand{\centerimage}[3]{
+\begin{figure}[ht!]  
+\begin{center}
+#1
+\caption{#1}
+\label{#3}
+\end{center}
+\end{figure}}
+
+%% bring the style into effect
+\pagestyle{fancy}
+
+% header/footers
+\usepackage{lastpage}
+
+%\cfoot{\textit{Page \thepage { of} \pageref{LastPage}}}
+%\chead{Project 1}
+%\rhead{Erik Rhodes | Bhavana Dhulipala}
+
+\usepackage{color}
+
+	\RequirePackage{fancybox}
+
+	% enable insertion of graphics
+	\RequirePackage{graphicx}
+
+	% better options for floating objects such as figures and tables
+	\RequirePackage{float}	
+
+	% interface to document dimensions 	
+%	\RequirePackage[letterpaper, portrait, margin=1.0in]{geometry}
+
+	% fancy headers and footers
+	\RequirePackage{fancyhdr}	
+		% Header/footer Thickness
+		\renewcommand{\headrulewidth}{0.7pt}
+		\renewcommand{\footrulewidth}{0.5pt}
+		\pagestyle{fancy}	%% bring the style into effect
+
+	% remove colored boxes around hyperlinks
+%	\usepackage[colorlinks=true,linkcolor=black, urlcolor=black]{hyperref}
+
+	% enables referencing the last page (used for page X of Y in footers)
+	\usepackage{lastpage}
+
+	% exposes color constants, used for listings package 
+	\usepackage{color}
+	\usepackage{xcolor}
+	\definecolor{mygreen}{rgb}{0,0.5,0}
+	\definecolor{myred}{rgb}{.8,0,0}
+
+	% powerful tabular environment tools to do things like bold an entire row, etc. 
+	\usepackage{array}
+
+	% exposes caption formatting interface
+	\usepackage[font={small,it}]{caption}
+
+\usepackage{textcomp}
+\usepackage{listings}
+\definecolor{mygreen}{rgb}{0,0.5,0}
+\definecolor{myred}{rgb}{.8,0,0}
+\usepackage{verbatim}
+
+% LISTINGS-SPECIFIC CONFIG
+	% the following enables fancy boxed code listings, as well as setting the code language to Java and setting various other listings options
+	\DeclareCaptionFont{white}{\color{white}}
+	\DeclareCaptionFormat{listing}{\hspace{-3pt}
+	\parbox{\textwidth}{\vspace{-6pt}\hspace{-3pt}\colorbox{black}{\parbox{\textwidth}{\small#1#2#3}}\vskip-1pt}}
+	\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+	\lstset{frame=single,numbers=left, language = c, numbersep=-8pt,numberstyle= \scriptsize, basicstyle=\footnotesize,showstringspaces=false, numberstyle=\scriptsize, breaklines=true, numberblanklines=true, keywordstyle=\bf \color{blue}, commentstyle=\it \color{mygreen}, stringstyle=\color{magenta}, tabsize=2
+	}
