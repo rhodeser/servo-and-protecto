@@ -113,10 +113,10 @@ The software portion was written in the \textbf{Arduino} IDE, and we modified so
 		\multirow{5}{*}{Motor}
 						&	Drive Forward		&	Both wheels moving forward at predefined speed 		\\
 						&	Drive Backward		&	Both wheels moving backward at predefined speed 		\\
-						&	Turn Left/Right		&	Both wheels spin for ``in-place'' turn of 90\degree	 	\\
+						&	Rotate Left/Right	&	Both wheels spin for ``in-place'' turn of 90\degree	 	\\
 						&	Veer Left/Right		&	Only outside wheel turns and vehicle does not stop\\
 						&	U-Turn				&	Backs up then turns 180\degree		\\
-						&	Victory Dance		&	After certain time, bot does various spins	\\\hline
+						&	Coolness			&	After certain time, bot does various spins	\\\hline
 		\multirow{2}{*}{Sonar + Servo}
 						&	Look Forward		&	Scans a 40\degree range in front while moving forward \\
 					&	Look Left/Right		&	Scans 90\degree left/right to determine next turn \\\hline
@@ -184,9 +184,9 @@ After initializing our components, the software ran an infinite loop which scans
 
 \subsection{Algorithm}
 
-Talk about the specific algorithms, referring to the figures.
-Mention victory dance
-%TODO Do we need this since the code above explains this?
+%Talk about the specific algorithms, referring to the figures.
+%Mention victory dance
+%TODO Do we need this since the code above explains this? -- YES because this is the way Roy wants reports .. trust me
 %TODO Mention intervals of 10 degrees and how they are averaged
 
 	\begin{figure}[h]\centering
@@ -202,39 +202,37 @@ Mention victory dance
 		\label{scan}
 	\end{figure}
 
-%  This program controls the servo and protecto robot car. The bot has one important task "avoid obstacles".
-%  The main function "loop" is called after the setup is done. 
-%  In that function, there is a counter that will tell the bot when to do its "victory dance". 
-%  If it is not the time for dancing, the scanClear() function is called. If the return value is TRUE (i.e. clear), the bot drives forward.
-%  Otherwise, it stops then calls "lookLeft()" and "lookRight()" and gets the average distances to its left and right.
-%  If the distanceLeft is greater than the distanceRight and greater than the "dangerThreshold" then the bot backs up and rotates left.
-%  Else if the distanceRight is greater than the distanceLeft and greater than the "dangerThreshold" then the bot backs up and rotates right.
-%  Otherwise, it is blocked on both sides. Therefore, it backs up and makes a u-turn.
-% 
+This program controls the servo and protecto robot car. The bot has one important task "avoid obstacles".
+The main function "loop" is called after the setup is done. 
+In that function, there is a counter that will tell the bot when to do its "victory dance". 
+If it is not the time for dancing, the scanClear() function is called. If the return value is TRUE (i.e. clear), the bot drives forward.
+Otherwise, it stops then calls "lookLeft()" and "lookRight()" and gets the average distances to its left and right.
+If the distanceLeft is greater than the distanceRight and greater than the "dangerThreshold" then the bot backs up and rotates left.
+Else if the distanceRight is greater than the distanceLeft and greater than the "dangerThreshold" then the bot backs up and rotates right.
+Otherwise, it is blocked on both sides. Therefore, it backs up and makes a u-turn.
+
 %  Note: the "rotate" functions use two wheels one forward and one backward to make a quick move. The "veer" functions only use one wheel to do a slow veer movement.
 % 
-%  However, if it is the time to dance, then the "coolness()" function is called and the bot performs its victory dance.
-% 
-%  The scanClear() function calls the lookForward() function and analyzes the data that is returned by it.
-%  It goes through all the readings and checks if any of the distances returned is below the COLLISION_DISTANCE. 
-%  If it is, then it sets the clear flag to FALSE and continues the analysis.
-%  However, if a distance is below the COLLISION_DISTANCE and below the EMERGENCY_DISTANCE then it directly returns FALSE and 
-%  exits the function so that the correct reaction takes place.
-%  Otherwise, it finishes the analysis and sets the clear flag to TRUE. Then, it checks the average distance on the left and right of the data gathered by looking forward.
-%  If the leftDistance is less than the AVOIDANCE_DISTANCE and the rightDistance is greater than the AVOIDANCE_DISTANCE, then the bot veers right.
-%  Else if the rightDistance is less than the AVOIDANCE_DISTANCE and the leftDistance is greater than the AVOIDANCE_DISTANCE, then the bot veers left.
-% 
-%  The look functions set up the angles and call the scan() function.
-%  
-%  The scan() function actually performs the scans at each angle by sending a sonar "ping" and waiting for the return signal to measure the distance.
-%  Sometime the sonar returns very low values that are not correct which would make the bot stop even if there is no obstacle.
-%  To avoid that, in the scan function, if the returned distance is below the EMERGENCY_DISTANCE then the bot sends another ping. If that newly measured distance is still below
-%  the EMERGENCY_DISTANCE, then it re-centers the sonar and stops scanning so that the necessary reaction takes place as soon as possible.
-% 
-%  Acknowledgement: this algorithm is based on the functions and sample sketch provided by oddWires with the purchase of the oddWires Arduino Kit.
-%                   We used the idea behind the code but we repurposed the functions and used our own algorithms which basically made the bot behave 
-%                   better in emergency situations and avoid obstacles in a smoother way. 
-% 
+However, if it is the time to dance, then the "coolness()" function is called and the bot performs its victory dance.
+
+The scanClear() function calls the lookForward() function and analyzes the data that is returned by it.
+It goes through all the readings and checks if any of the distances returned is below the COLLISION\_DISTANCE. 
+If it is, then it sets the clear flag to FALSE and continues the analysis.
+However, if a distance is below the COLLISION\_DISTANCE and below the EMERGENCY\_DISTANCE then it directly returns FALSE and exits the function so that the correct reaction takes place.
+Otherwise, it finishes the analysis and sets the clear flag to TRUE. Then, it checks the average distance on the left and right of the data gathered by looking forward.
+If the leftDistance is less than the AVOIDANCE\_DISTANCE and the rightDistance is greater than the AVOIDANCE\_DISTANCE, then the bot veers right.
+Else if the rightDistance is less than the AVOIDANCE\_DISTANCE and the leftDistance is greater than the AVOIDANCE\_DISTANCE, then the bot veers left.
+
+The look functions set up the angles and call the scan() function.
+ 
+The scan() function actually performs the scans at each angle by sending a sonar "ping" and waiting for the return signal to measure the distance.
+Sometime the sonar returns very low values that are not correct which would make the bot stop even if there is no obstacle.
+To avoid that, in the scan function, if the returned distance is below the EMERGENCY\_DISTANCE then the bot sends another ping. If that newly measured distance is still below the EMERGENCY\_DISTANCE, then it re-centers the sonar and stops scanning so that the necessary reaction takes place as soon as possible.
+
+Acknowledgement: this algorithm is based on the functions and sample sketch provided by oddWires with the purchase of the oddWires Arduino Kit.
+                 We used the idea behind the code but we repurposed the functions and used our own algorithms which basically made the bot behave 
+                 better in emergency situations and avoid obstacles in a smoother way. 
+
 
 
 
