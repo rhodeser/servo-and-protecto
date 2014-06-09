@@ -51,84 +51,27 @@
 
 \begin{figure}[h]\centering
 \includegraphics[height=0.65\textwidth]{images/bot_front.jpg}
-	%\caption{Gameplay Block Diagram}
 		\label{bot_front}
 	\end{figure}
 	
 \tableofcontents
 \newpage
 
-% -------------------------From code -----------------------------------
-% * This program controls the servo and protecto robot car. The bot has one important task "avoid obstacles".
-% * The main function "loop" is called after the setup is done. 
-% * In that function, there is a counter that will tell the bot when to do its "victory dance". 
-% * If it is not the time for dancing, the scanClear() function is called. If the return value is TRUE (i.e. clear), the bot drives forward.
-% * Otherwise, it stops then calls "lookLeft()" and "lookRight()" and gets the average distances to its left and right.
-% * If the distanceLeft is greater than the distanceRight and greater than the "dangerThreshold" then the bot backs up and rotates left.
-% * Else if the distanceRight is greater than the distanceLeft and greater than the "dangerThreshold" then the bot backs up and rotates right.
-% * Otherwise, it is blocked on both sides. Therefore, it backs up and makes a u-turn.
-% *
-% * Note: the "rotate" functions use two wheels one forward and one backward to make a quick move. The "veer" functions only use one wheel to do a slow veer movement.
-% *
-% * However, if it is the time to dance, then the "coolness()" function is called and the bot performs its victory dance.
-% *
-% * The scanClear() function calls the lookForward() function and analyzes the data that is returned by it.
-% * It goes through all the readings and checks if any of the distances returned is below the COLLISION_DISTANCE. 
-% * If it is, then it sets the clear flag to FALSE and continues the analysis.
-% * However, if a distance is below the COLLISION_DISTANCE and below the EMERGENCY_DISTANCE then it directly returns FALSE and 
-% * exits the function so that the correct reaction takes place.
-% * Otherwise, it finishes the analysis and sets the clear flag to TRUE. Then, it checks the average distance on the left and right of the data gathered by looking forward.
-% * If the leftDistance is less than the AVOIDANCE_DISTANCE and the rightDistance is greater than the AVOIDANCE_DISTANCE, then the bot veers right.
-% * Else if the rightDistance is less than the AVOIDANCE_DISTANCE and the leftDistance is greater than the AVOIDANCE_DISTANCE, then the bot veers left.
-% *
-% * The look functions set up the angles and call the scan() function.
-% * 
-% * The scan() function actually performs the scans at each angle by sending a sonar "ping" and waiting for the return signal to measure the distance.
-% * Sometime the sonar returns very low values that are not correct which would make the bot stop even if there is no obstacle.
-% * To avoid that, in the scan function, if the returned distance is below the EMERGENCY_DISTANCE then the bot sends another ping. If that newly measured distance is still below
-% * the EMERGENCY_DISTANCE, then it re-centers the sonar and stops scanning so that the necessary reaction takes place as soon as possible.
-% *
-% * Acknowledgement: this algorithm is based on the functions and sample sketch provided by oddWires with the purchase of the oddWires Arduino Kit.
-% *                  We used the idea behind the code but we repurposed the functions and used our own algorithms which basically made the bot behave 
-% *                  better in emergency situations and avoid obstacles in a smoother way. 
-% *
-% ----------------------------------------------------------------------------------
-
 \section{Introduction} 
-We created an autonomous robot car (SaMMY) that can successfully navigate its way through a given area without hitting any objects .  It uses the popular \textbf{Arduino} platform and libraries along with a ultrasonic sensor for object detection.  
-
-
+We created an autonomous robot car (SaMMY) that can successfully navigate its way through a given area without hitting any objects . It uses the popular \textbf{Arduino} platform and libraries along with a ultrasonic sensor for object detection. 
 
 %TODO 
-% Software algorithm code
-% Make flowchart look good
-% Label picture of car
-% Make diagram of pin connections on arduino Uno?
-
-
-%Features
-
-%Components (hardware)
-%-pictures?
-%-diagram?
-%Algorithm (software)
-%-flowchart
-%-scans to left and right when going forward...
-%-scans ...
-
-%references
-%-oddwires
-%-arduino
-
-
+% Block diagram of arduino
+% Other flowcharts?
+% Explain algorithms
 
 \section{Hardware Components}
-%TODO References (oddwires), get links to datasheets/descriptions
+%TODO References (oddwires)
 There are many different components needed to successfully and robustly create an autonomous robot.  The bulk of our design used a robot kit we ordered online (ref).  We also added various parts to make the production time more convenient, including switches, additional batteries, and various cables.  The important components can be seen in Figure \ref{diagram} and are described in Table \ref{components}.
 
 
 	\begin{figure}[h]\centering
-	\includegraphics[height=0.7\textwidth]{images/bot_diagram.png}
+	\includegraphics[height=0.57\textwidth]{images/bot_diagram.png}
 	\caption{Block Diagram of Control System}
 		\label{diagram}
 	\end{figure}
@@ -137,15 +80,16 @@ There are many different components needed to successfully and robustly create a
 	\begin {center} 
 	%\vspace{15pt}
 	
-	\begin{tabular}{||c|c|c||}\hline	
+	\begin{tabular}{||l|c|c||}\hline
+	%\multicolumn{3}{ |c| }{\textbf{Component List}} \\\hline	
 		\textbf{Part Name}	&	\textbf{Function}	&	\textbf{Details}		\\\hline
-		1. 		&	Motor				&	insert link 		\\\hline
-		2. 		&	180\degree rotation using PWM 		&	insert link 		\\\hline
-		3.		&	Sonar sensor for object detection	&	insert link	 	\\\hline
-		4. Arduino Uno		&	Microcontroller Board			&	insert link 		\\\hline
-		5.		&	Motor Shield		&	insert link	\\\hline
+		1. Motor 		&	Drives wheels				&	N/A 		\\\hline
+		2. RadioShack\textsuperscript{\textregistered} Standard Servo		&	180\degree rotation 		&	\url{http://shack.net/Ty2VB4} 		\\\hline
+		3. Ultrasonic Ranging Module HC-SR04		&	Object detection	&	\url{http://bit.ly/1lhqwjI}	 	\\\hline
+		4. Arduino Uno		&	Microcontroller Board			&	\url{http://bit.ly/1gBB1NG} 		\\\hline
+		5.	L293D Motor Driver Shield	&	Controls motors &	\url{http://bit.ly/1uILISF}	\\\hline
 		6. Switch	&	On/Off power button &	N/A	\\\hline
-		7. Batteries (not pictured) & 	9V AA batteries  & 	External power for Arduino, motors and servo
+		7. Batteries (not pictured) & 	9V AA External Power & 	For Arduino/motors/servo \\\hline
 
 		
 	\end{tabular}
@@ -153,10 +97,8 @@ There are many different components needed to successfully and robustly create a
 	\end{center}
 	\end{table} 		
 	
-Blah Blah blah fill this section
-lines\\
-lines\\
-lines\\
+Assembling the kit took a fair amount of time.  We added a switch, soldered pins onto the motor shield for the sonar sensor, added the motor shield, changed the weight a few different times, and taped the battery holder to ensure the batteries wouldn't get displaced. 
+
 
 \section{Robot Control}
 
@@ -166,7 +108,7 @@ The software portion was written in the \textbf{Arduino} IDE, and we modified so
 	\begin {center} 
 	\vspace{15pt}
 	
-	\begin{tabular}{||c|c|c||}\hline	
+	\begin{tabular}{||c|c|l||}\hline	
 		\textbf{Component}	&	\textbf{Function}	&	\textbf{Details}		\\\hline
 		\multirow{5}{*}{Motor}
 						&	Drive Forward		&	Both wheels moving forward at predefined speed 		\\
@@ -179,7 +121,6 @@ The software portion was written in the \textbf{Arduino} IDE, and we modified so
 						&	Look Forward		&	Scans a 40\degree range in front while moving forward \\
 					&	Look Left/Right		&	Scans 90\degree left/right to determine next turn \\\hline
 
-%TODO Mention intervals of 10 degrees and how they are averaged
 
 		
 	\end{tabular}
@@ -196,7 +137,7 @@ After initializing our components, the software ran an infinite loop which scans
 \vspace{12pt}
 
  \begin{lstlisting}[caption=Control Loop, label=loop]		
-void loop() {
+  void loop() {
     if (scanClear())  // If clear to go forward
     {
       drive_forward();
@@ -236,16 +177,69 @@ void loop() {
       }   
     } 
   }  
-}
+  }
   \end{lstlisting}
 
-%TODO flow diagrams, mockups of components? mention, label batteries?
+%TODO flow diagrams, mockups of components, block diagram (edit battery holder)
 
 \subsection{Algorithm}
-Include flowchart(s) here with explanations.
+
+Talk about the specific algorithms, referring to the figures.
+Mention victory dance
+%TODO Do we need this since the code above explains this?
+%TODO Mention intervals of 10 degrees and how they are averaged
+
+	\begin{figure}[h]\centering
+	\includegraphics[height=0.85\textwidth]{images/main.png}
+	\caption{Main Loop Flowchart}
+		\label{main}
+	\end{figure}
+
+
+	\begin{figure}[h]\centering
+	\includegraphics[height=0.85\textwidth]{images/scan_clear.png}
+	\caption{Scan Flowchart}
+		\label{scan}
+	\end{figure}
+
+%  This program controls the servo and protecto robot car. The bot has one important task "avoid obstacles".
+%  The main function "loop" is called after the setup is done. 
+%  In that function, there is a counter that will tell the bot when to do its "victory dance". 
+%  If it is not the time for dancing, the scanClear() function is called. If the return value is TRUE (i.e. clear), the bot drives forward.
+%  Otherwise, it stops then calls "lookLeft()" and "lookRight()" and gets the average distances to its left and right.
+%  If the distanceLeft is greater than the distanceRight and greater than the "dangerThreshold" then the bot backs up and rotates left.
+%  Else if the distanceRight is greater than the distanceLeft and greater than the "dangerThreshold" then the bot backs up and rotates right.
+%  Otherwise, it is blocked on both sides. Therefore, it backs up and makes a u-turn.
+% 
+%  Note: the "rotate" functions use two wheels one forward and one backward to make a quick move. The "veer" functions only use one wheel to do a slow veer movement.
+% 
+%  However, if it is the time to dance, then the "coolness()" function is called and the bot performs its victory dance.
+% 
+%  The scanClear() function calls the lookForward() function and analyzes the data that is returned by it.
+%  It goes through all the readings and checks if any of the distances returned is below the COLLISION_DISTANCE. 
+%  If it is, then it sets the clear flag to FALSE and continues the analysis.
+%  However, if a distance is below the COLLISION_DISTANCE and below the EMERGENCY_DISTANCE then it directly returns FALSE and 
+%  exits the function so that the correct reaction takes place.
+%  Otherwise, it finishes the analysis and sets the clear flag to TRUE. Then, it checks the average distance on the left and right of the data gathered by looking forward.
+%  If the leftDistance is less than the AVOIDANCE_DISTANCE and the rightDistance is greater than the AVOIDANCE_DISTANCE, then the bot veers right.
+%  Else if the rightDistance is less than the AVOIDANCE_DISTANCE and the leftDistance is greater than the AVOIDANCE_DISTANCE, then the bot veers left.
+% 
+%  The look functions set up the angles and call the scan() function.
+%  
+%  The scan() function actually performs the scans at each angle by sending a sonar "ping" and waiting for the return signal to measure the distance.
+%  Sometime the sonar returns very low values that are not correct which would make the bot stop even if there is no obstacle.
+%  To avoid that, in the scan function, if the returned distance is below the EMERGENCY_DISTANCE then the bot sends another ping. If that newly measured distance is still below
+%  the EMERGENCY_DISTANCE, then it re-centers the sonar and stops scanning so that the necessary reaction takes place as soon as possible.
+% 
+%  Acknowledgement: this algorithm is based on the functions and sample sketch provided by oddWires with the purchase of the oddWires Arduino Kit.
+%                   We used the idea behind the code but we repurposed the functions and used our own algorithms which basically made the bot behave 
+%                   better in emergency situations and avoid obstacles in a smoother way. 
+% 
+
+
 
 \section{Conclusion}
-\texttt{Servo and Protecto} was quite fun for us to build and was certainly the biggest ``crowd pleaser'' out of all the projects we've made.  The assembly perhaps took the least amount of time, although we did face problems with a few of the parts not being built correctly (mainly the battery holder and motor plate mount).  Fixing the power problems was the most frustrating part of the project, but once we finished everything, the final product was quite rewarding.  We both spent equal times on all the different aspects of this project.  Listed below are some of the challenges we faced.
+\texttt{Servo and Protecto} was quite fun for us to build and was certainly the biggest ``crowd pleaser'' out of all the projects we've made.  The assembly perhaps took the least amount of time, although we did face problems with a few of the parts not being built correctly (mainly the battery holder and motor plate mount).  Fixing the power problems was the most frustrating part of the project, but once we finished everything, the final product was quite rewarding.  We both spent equal times on all the different aspects of this project.  Currently, SaMMY performs quite well, even if he does run into walls occasionally.  This is caused by veering, which was a tough issue to fix. Listed below are some of the challenges we faced.
 	
 	\subsection{Challenges}
 		
@@ -267,5 +261,11 @@ The Arduino platform and components in this project provide a large amount of fu
 		\end{itemize}
 
 \section{References}
-Include oddwires stuff?
+%TODO
+\textbf{Oddwires} Robot Kit:  \url{http://bit.ly/TysmCv}
+Arduino Libraries
+Pictures
 \end{document}
+%references
+%-oddwires
+%-arduino

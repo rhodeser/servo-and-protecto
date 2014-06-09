@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.22)  8 JUN 2014 22:48
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.22)  9 JUN 2014 01:45
 entering extended mode
  %&-line parsing enabled.
 **report_final.tex
@@ -717,7 +717,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 45.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 45.
-<images/bot_front.jpg, id=54, 3276.24pt x 2457.18pt>
+<images/bot_front.jpg, id=42, 3276.24pt x 2457.18pt>
 File: images/bot_front.jpg Graphic file (type jpg)
 
 <use images/bot_front.jpg> (./report_final.toc [1
@@ -736,89 +736,93 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[2] <images/bot_diagram.png, id=89, 1780.6525pt x 1049.9225pt>
+[2] <images/bot_diagram.png, id=74, 1746.525pt x 997.7275pt>
 File: images/bot_diagram.png Graphic file (type png)
 
 <use images/bot_diagram.png>
-Overfull \hbox (87.9202pt too wide) in paragraph at lines 100--101
- [][] 
+Overfull \hbox (10.09628pt too wide) in paragraph at lines 83--96
+ [] 
  []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
 
 [3 <./images/bot_diagram.png>]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 166.
+nput line 139.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 166.
+(Font)              <7> on input line 139.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 166.
+(Font)              <5> on input line 139.
 
-Overfull \hbox (3.0pt too wide) in paragraph at lines 166--166
+Overfull \hbox (3.0pt too wide) in paragraph at lines 139--139
 [] [][][][][][] 
  []
 
 
-Overfull \hbox (3.0pt too wide) in paragraph at lines 166--166
+Overfull \hbox (3.0pt too wide) in paragraph at lines 139--139
 [] [][][][][][] 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 167.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 140.
 
 (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 167.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 140.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 181.
- [4]
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 185.
+(Font)              <9> on input line 154.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 158.
 
 
 (/usr/share/texmf-texlive/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <9> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 185.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 158.
+ [4]
+<images/main.png, id=129, 1134.2375pt x 1124.2pt>
+File: images/main.png Graphic file (type png)
+ <use images/main.png>
 
-Overfull \hbox (3.0pt too wide) in paragraph at lines 216--216
-[] [][][][][][] 
- []
+LaTeX Warning: `h' float specifier changed to `ht'.
 
+<images/scan_clear.png, id=130, 1224.575pt x 1224.575pt>
+File: images/scan_clear.png Graphic file (type png)
 
-Overfull \hbox (3.0pt too wide) in paragraph at lines 216--216
-[] [][][][][][] 
- []
+<use images/scan_clear.png>
 
-[5] [6] [7] [8] AED: lastpage setting LastPage (./report_final.aux) ) 
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[5] [6 <./images/main.png>] [7 <./images/scan_clear.png>] [8]
+AED: lastpage setting LastPage (./report_final.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 16371 strings out of 495061
- 284719 string characters out of 1182620
- 542746 words of memory out of 3000000
- 19120 multiletter control sequences out of 15000+50000
+ 16288 strings out of 495061
+ 283596 string characters out of 1182620
+ 461745 words of memory out of 3000000
+ 19067 multiletter control sequences out of 15000+50000
  15757 words of font info for 53 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 56i,12n,55p,924b,1740s stack positions out of 5000i,500n,10000p,200000b,50000s
- </home/oe
-m/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0900.600pk> </home/oem/.texmf-var/
-fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/share/texmf-texlive/fonts/type
-1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/am
-sfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/c
-mbx9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><
-/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/t
-exmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive
-/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1
-/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/amsf
-onts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.
-pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/sh
-are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-t
-exlive/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texmf-texlive/fonts
-/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report_final.pdf (8 pages, 5306549 bytes).
+ 56i,12n,55p,775b,1736s stack positions out of 5000i,500n,10000p,200000b,50000s
+ </home/oem/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </home/oem
+/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0800.600pk></usr/share/texmf-texliv
+e/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/typ
+e1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/public/a
+msfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/c
+mcsc10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi9.pfb><
+/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/t
+exmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive
+/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1
+/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfo
+nts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.
+pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/s
+hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texmf-t
+exlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on report_final.pdf (8 pages, 5378480 bytes).
 PDF statistics:
- 288 PDF objects out of 1000 (max. 8388607)
- 99 named destinations out of 1000 (max. 500000)
- 119 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 244 PDF objects out of 1000 (max. 8388607)
+ 67 named destinations out of 1000 (max. 500000)
+ 105 words of extra memory for PDF output out of 10000 (max. 10000000)
 
