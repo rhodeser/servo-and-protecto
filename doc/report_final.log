@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.5.13)  9 JUN 2014 09:51
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.5.13)  9 JUN 2014 10:21
 entering extended mode
 **report_final.tex
 
@@ -902,21 +902,27 @@ Package pdftex.def Info: images/scan_clear.png used on input line 200.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+
+Overfull \hbox (34.96634pt too wide) in paragraph at lines 213--214
+[]\OT1/cmr/m/n/10.95 However, if a dis-tance is be-low the COL-LI-SION[]DISTANC
+E and be-low the EMER-GENCY[]DISTANCE
+ []
+
 [5] [6 <C:/Users/Caren/Dropbox/PSU/ECE544/Projects/servo-and-protecto/doc/image
 s/main.png>] [7 <C:/Users/Caren/Dropbox/PSU/ECE544/Projects/servo-and-protecto/
 doc/images/scan_clear.png>] 
 AED: lastpage setting LastPage
 [8]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 266.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 266.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 256.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 256.
 
 (C:\Users\Caren\Dropbox\PSU\ECE544\Projects\servo-and-protecto\doc\report_final
 .aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 266.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 266.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 256.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 256.
 Package rerunfilecheck Info: File `report_final.out' has not changed.
 (rerunfilecheck)             Checksum: FD17EC9032F8D23FF58441DB37A5BEC4;488.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 266.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 256.
  ) 
 Here is how much of TeX's memory you used:
  18854 strings out of 493921
@@ -925,7 +931,7 @@ Here is how much of TeX's memory you used:
  21758 multiletter control sequences out of 15000+200000
  15757 words of font info for 53 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 55i,12n,54p,775b,1764s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 55i,12n,54p,899b,1768s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Caren\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
 tcrm1095.pk> <C:\Users\Caren\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\
 ec\dpi600\tcrm0800.pk><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/ams
@@ -942,7 +948,7 @@ ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Progr
 am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program
  Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti9.pfb><C:/Program Fi
 les (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report_final.pdf (8 pages, 5380923 bytes).
+Output written on report_final.pdf (8 pages, 5381803 bytes).
 PDF statistics:
  244 PDF objects out of 1000 (max. 8388607)
  67 named destinations out of 1000 (max. 500000)
