@@ -58,24 +58,52 @@
 \tableofcontents
 \newpage
 
-% -------------------------PROJECT DELIVERABLES -----------------------------------
-
+% -------------------------From code -----------------------------------
+% * This program controls the servo and protecto robot car. The bot has one important task "avoid obstacles".
+% * The main function "loop" is called after the setup is done. 
+% * In that function, there is a counter that will tell the bot when to do its "victory dance". 
+% * If it is not the time for dancing, the scanClear() function is called. If the return value is TRUE (i.e. clear), the bot drives forward.
+% * Otherwise, it stops then calls "lookLeft()" and "lookRight()" and gets the average distances to its left and right.
+% * If the distanceLeft is greater than the distanceRight and greater than the "dangerThreshold" then the bot backs up and rotates left.
+% * Else if the distanceRight is greater than the distanceLeft and greater than the "dangerThreshold" then the bot backs up and rotates right.
+% * Otherwise, it is blocked on both sides. Therefore, it backs up and makes a u-turn.
+% *
+% * Note: the "rotate" functions use two wheels one forward and one backward to make a quick move. The "veer" functions only use one wheel to do a slow veer movement.
+% *
+% * However, if it is the time to dance, then the "coolness()" function is called and the bot performs its victory dance.
+% *
+% * The scanClear() function calls the lookForward() function and analyzes the data that is returned by it.
+% * It goes through all the readings and checks if any of the distances returned is below the COLLISION_DISTANCE. 
+% * If it is, then it sets the clear flag to FALSE and continues the analysis.
+% * However, if a distance is below the COLLISION_DISTANCE and below the EMERGENCY_DISTANCE then it directly returns FALSE and 
+% * exits the function so that the correct reaction takes place.
+% * Otherwise, it finishes the analysis and sets the clear flag to TRUE. Then, it checks the average distance on the left and right of the data gathered by looking forward.
+% * If the leftDistance is less than the AVOIDANCE_DISTANCE and the rightDistance is greater than the AVOIDANCE_DISTANCE, then the bot veers right.
+% * Else if the rightDistance is less than the AVOIDANCE_DISTANCE and the leftDistance is greater than the AVOIDANCE_DISTANCE, then the bot veers left.
+% *
+% * The look functions set up the angles and call the scan() function.
+% * 
+% * The scan() function actually performs the scans at each angle by sending a sonar "ping" and waiting for the return signal to measure the distance.
+% * Sometime the sonar returns very low values that are not correct which would make the bot stop even if there is no obstacle.
+% * To avoid that, in the scan function, if the returned distance is below the EMERGENCY_DISTANCE then the bot sends another ping. If that newly measured distance is still below
+% * the EMERGENCY_DISTANCE, then it re-centers the sonar and stops scanning so that the necessary reaction takes place as soon as possible.
+% *
+% * Acknowledgement: this algorithm is based on the functions and sample sketch provided by oddWires with the purchase of the oddWires Arduino Kit.
+% *                  We used the idea behind the code but we repurposed the functions and used our own algorithms which basically made the bot behave 
+% *                  better in emergency situations and avoid obstacles in a smoother way. 
+% *
 % ----------------------------------------------------------------------------------
 
 \section{Introduction} 
-We created an autonomous robot car (Sammy) that can successfully navigate its way through a given area without hitting any objects (usually).  It uses the popular \textbf{Arduino} platform and libraries along with a ultrasonic sensor for object detection.  
+We created an autonomous robot car (SaMMY) that can successfully navigate its way through a given area without hitting any objects .  It uses the popular \textbf{Arduino} platform and libraries along with a ultrasonic sensor for object detection.  
 
-	\begin{figure}[h]\centering
-	\includegraphics[height=0.7\textwidth]{images/bot_front.jpg}
-	\caption{Block Diagram of Control System}
-		\label{diagram}
-	\end{figure}
 
 
 %TODO 
 % Software algorithm code
 % Make flowchart look good
 % Label picture of car
+% Make diagram of pin connections on arduino Uno?
 
 
 %Features
@@ -85,35 +113,56 @@ We created an autonomous robot car (Sammy) that can successfully navigate its wa
 %-diagram?
 %Algorithm (software)
 %-flowchart
-%-some code
 %-scans to left and right when going forward...
 %-scans ...
 
 %references
 %-oddwires
-%-arduino}
+%-arduino
 
 
 
 \section{Hardware Components}
-%TODO Reference
-Show diagram of components on the picture...
+%TODO References (oddwires), get links to datasheets/descriptions
+There are many different components needed to successfully and robustly create an autonomous robot.  The bulk of our design used a robot kit we ordered online (ref).  We also added various parts to make the production time more convenient, including switches, additional batteries, and various cables.  The important components can be seen in Figure \ref{diagram} and are described in Table \ref{components}.
 
 
+	\begin{figure}[h]\centering
+	\includegraphics[height=0.7\textwidth]{images/bot_diagram.png}
+	\caption{Block Diagram of Control System}
+		\label{diagram}
+	\end{figure}
+
+	\begin {table}[h]
+	\begin {center} 
+	%\vspace{15pt}
+	
+	\begin{tabular}{||c|c|c||}\hline	
+		\textbf{Part Name}	&	\textbf{Function}	&	\textbf{Details}		\\\hline
+		1. 		&	Motor				&	insert link 		\\\hline
+		2. 		&	180\degree rotation using PWM 		&	insert link 		\\\hline
+		3.		&	Sonar sensor for object detection	&	insert link	 	\\\hline
+		4. Arduino Uno		&	Microcontroller Board			&	insert link 		\\\hline
+		5.		&	Motor Shield		&	insert link	\\\hline
+		6. Switch	&	On/Off power button &	N/A	\\\hline
+		7. Batteries (not pictured) & 	9V AA batteries  & 	External power for Arduino, motors and servo
+
+		
+	\end{tabular}
+		\caption {Hardware Components List} \label{components}
+	\end{center}
+	\end{table} 		
+	
+Blah Blah blah fill this section
+lines\\
+lines\\
+lines\\
 
 \section{Robot Control}
 
 \subsection{Functions}
-Motor
-%Motor
-%-Drive Forward
-%-Drive Backward
-%-Turn left/right
-%-Veer left/right
-%-U turn
-%-Victory Dance
-
-	\begin {table}[h]
+The software portion was written in the \textbf{Arduino} IDE, and we modified some of the existing libraries.  The main functions for our project are listed in Table \ref{functions}.  
+	\begin {table}[h!]
 	\begin {center} 
 	\vspace{15pt}
 	
@@ -121,7 +170,7 @@ Motor
 		\textbf{Component}	&	\textbf{Function}	&	\textbf{Details}		\\\hline
 		\multirow{5}{*}{Motor}
 						&	Drive Forward		&	Both wheels moving forward at predefined speed 		\\
-						&	Drive Backward		&	Both wheels moving forward at predefined speed 		\\
+						&	Drive Backward		&	Both wheels moving backward at predefined speed 		\\
 						&	Turn Left/Right		&	Both wheels spin for ``in-place'' turn of 90\degree	 	\\
 						&	Veer Left/Right		&	Only outside wheel turns and vehicle does not stop\\
 						&	U-Turn				&	Backs up then turns 180\degree		\\
@@ -138,11 +187,11 @@ Motor
 	\end{center}
 	\end{table} 	
 
-Sonar and servo
 %scan partial left and right when driving forward, get average
 %scan fully left and right, get average
 %
 
+After initializing our components, the software ran an infinite loop which scans for objects and makes decisions on which direction to go.  The main control flow is seen in listing \ref{loop} below.
 
 \vspace{12pt}
 
@@ -190,104 +239,10 @@ void loop() {
 }
   \end{lstlisting}
 
-\subsubsection{PID}
-The more prevalent method, PID, involves making multiple calculations to predict the accurately control the behavior of the output.  The proportional (P) method involves using the previous error margin to calculate the next appropriate one.  The integral (I) method calculates how the system behaves over time, and the derivative (D) calculates how fast the output is changing at that point in time.  Our implementation is seen in listing \ref{PID}. \\
-Using a specific arrangement of these parameters will yield a large increase in accuracy, so tuning the application is desirable.  When tuning, we first attempted to follow the \emph{Ziegler-Nichols} method.  After understanding how each method changes the output, we modified the parameters as we saw fit to acquire the most accurate configuration for our control system. 
+%TODO flow diagrams, mockups of components? mention, label batteries?
 
-\vspace{12pt}
-
- \begin{lstlisting}[caption=PID Algorithm, label=PID]		
-     for (smpl_idx = 1; smpl_idx < NUM_FRQ_SAMPLES; smpl_idx++)
-     {
-         delay_msecs(100);
- 
-         // get count from light sensor and convert to voltage 
-         sample[smpl_idx] = LIGHTSENSOR_Capture(LIGHTSENSOR_BASEADDR, slope, offset, is_scaled, freq_min_cnt);
-         volt_out = (-3.3 / 4095.0) * (sample[smpl_idx]) + 3.3;
-
-         // calculate derivative;
-         error = setpoint - volt_out;
-         deriv = error - prev_error;
- 
-         // calculate integral
-         if (error < setpoint/10) integral += error;
-         else integral = 0; 
- 
-         // Control offset is gotten from characterization
-         volt_out = offset + (error * prop_gain) + (deriv * deriv_gain) + (integral * integral_gain);
-         duty_out = (volt_out)* (MAX_DUTY+1)/VOLT_MAX;
- 
-         // establish bounds
-         if (duty_out < 1) duty_out = 1;
-         if (duty_out > 99)duty_out = 99;
- 
-         // activate PWM
-         Status = PWM_SetParams(&PWMTimerInst, pwm_freq, duty_out);
-         if (Status == XST_SUCCESS)	 PWM_Start(&PWMTimerInst);
-     } 
-  \end{lstlisting}
-  
-  
-
-
-\subsection{Peripheral Interface}
-The \textbf{TSL237} light-to-frequency converter outputs a period that directly corresponds to the intensity of the light emitted from the LED.  The PWM detection module receives this information and converts it to a ``count'', which is then scaled to fit within the parameters (between 0 and 4095) needed for our control calculations.  These functions are handled in the light sensor driver.  The driver initially converted the scaled counts to a voltage, but we later decided to move that functionality to the program application.
-The peripheral has the user-visible registers described in table \ref{registers}.
-
-	\begin {table}[H]
-	\begin {center} 
-	\vspace{15pt}
-	
-	\begin{tabular}{||c|c|c|c||}\hline
-		\textbf{Register}	&	\textbf{Number}	&	\textbf{Format} 	& 	\textbf{Description}		\\\hline
-		Control				&	slv\_reg0		&	{RESERVED[30:0], EN} &  Enable of the peripheral 		\\\hline
-		Status				&	slv\_reg1		&	{RESERVED[30:0], EN} & Current settings of the peripheral		\\\hline
-		HighTime			&	slv\_reg2		&    HighTime[31:0] 	&	Detected high time count  			\\\hline
-		Period				&	slv\_reg3		&  	Period[31:0] 		&	Detected period count 			\\\hline
-		SpareReg1			&	slv\_reg4		&	RESERVED[31:0] 		& 	No specific purpose 			\\\hline
-		SpareReg2			&	slv\_reg5		&	RESERVED[31:0] 		& 	No specific purpose 			\\\hline
-	\end{tabular}
-		\caption {Lightsensor peripheral registers} \label{registers}
-	\end{center}
-	\end{table} 
-	
-
-\subsection{Frequency detection}
-%TODO Include info about how the detection worked
-The measurements output by the light sensor were received by a hardware module that interpreted the data.  This Verilog program closely resembles the PWM detection module done in project 1.  It increments the count on each clock edge, depending on whether the input is high or low.  Once a full period is detected, the high count and period are sent to registers which are able to be read by the light sensor driver.  
-
-\subsection{User Controls} 
-The program starts by characterizing the system.  This allows the initial scaling to be performed, which varies by the amount of light detected by the light sensor. After this is done, the default control parameter values are displayed and the user is given a chance to change them.  The type of test and starting input voltage can also be selected.  Once these have been configured, the user starts the test with the rotary button.  When it has finished, long pressing on the rotary button sends the data to the computer connected serially via the UART port.  If the user wants to change the test, they can modify the switch values and update the LCD by pressing on the rotary button.  While the user interface remained close to the recommended specifications, it also included a few features that made it amazingly incredible. The control assignments are seen in table \ref{controls}.
- 
- 
-	\begin {table}[h!]
-	\begin {center} 
-	\vspace{15pt}
-	
-	\begin{tabular}{||c|c|c||}\hline	
-		\textbf{Name}	&	\textbf{Value}	&	\textbf{Function}		\\\hline
-		Switch[1:0]		&	00		&	Bang Bang 		\\\hline
-		Switch[1:0]		&	01		&	PID 		\\\hline
-		Switch[1:0]		&	10		&	Unused	 	\\\hline
-		Switch[1:0]		&	11		&	Characterization 		\\\hline
-		Switch[2]		&	0		&	Vin Low		\\\hline
-		Switch[2]		&	1		&	Vin High	\\\hline
-		Pushbutton		&	North	&	Move Cursor		\\\hline
-		Pushbutton		&	East	&	Increase Value		\\\hline
-		Pushbutton		&	West	&	Decrease Value		\\\hline
-		LCD Display 	&	Row 1	&	PID Values	\\\hline
-		LCD Display 	&	Row 2	&	Setpoint and Offset	\\\hline
-		Rotary Encoder	& Clockwise	& 	Increase Setpoint		\\\hline
-		Rotary Encoder	& Counter-Clockwise	& 	Decrease Setpoint		\\\hline
-		Rotary Encoder	& Press Button		& 	Next section \\\hline
-		Rotary Encoder	& Long Press Button	& 	Initiate test \\\hline
-		
-	\end{tabular}
-		\caption {Nexys3 Controls} \label{controls}
-	\end{center}
-	\end{table} 		
-  
-
+\subsection{Algorithm}
+Include flowchart(s) here with explanations.
 
 \section{Conclusion}
 \texttt{Servo and Protecto} was quite fun for us to build and was certainly the biggest ``crowd pleaser'' out of all the projects we've made.  The assembly perhaps took the least amount of time, although we did face problems with a few of the parts not being built correctly (mainly the battery holder and motor plate mount).  Fixing the power problems was the most frustrating part of the project, but once we finished everything, the final product was quite rewarding.  We both spent equal times on all the different aspects of this project.  Listed below are some of the challenges we faced.
