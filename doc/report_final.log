@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.22)  9 JUN 2014 21:46
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.22)  9 JUN 2014 21:52
 entering extended mode
  %&-line parsing enabled.
 **report_final.tex
@@ -736,7 +736,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[2] <images/bot_diagram.png, id=74, 1746.525pt x 997.7275pt>
+[2] <images/bot_diagram.png, id=75, 1746.525pt x 997.7275pt>
 File: images/bot_diagram.png Graphic file (type png)
 
 <use images/bot_diagram.png>
@@ -745,20 +745,20 @@ Overfull \hbox (10.09628pt too wide) in paragraph at lines 81--94
  []
 
 [3 <./images/bot_diagram.png>]
-<images/block_diagram.png, id=92, 1472.50125pt x 1589.94pt>
+<images/block_diagram.png, id=94, 1472.50125pt x 1589.94pt>
 File: images/block_diagram.png Graphic file (type png)
 
 <use images/block_diagram.png>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/main.png, id=94, 1134.2375pt x 1124.2pt>
+<images/main.png, id=96, 1134.2375pt x 1124.2pt>
 File: images/main.png Graphic file (type png)
  <use images/main.png>
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/scan_clear.png, id=95, 1224.575pt x 1224.575pt>
+<images/scan_clear.png, id=97, 1224.575pt x 1224.575pt>
 File: images/scan_clear.png Graphic file (type png)
 
 <use images/scan_clear.png>
@@ -806,11 +806,7 @@ MERGENCY[]DISTANCE
  []
 
 [6 <./images/main.png>] [7 <./images/scan_clear.png>] [8] [9]
-AED: lastpage setting LastPage (./report_final.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+AED: lastpage setting LastPage (./report_final.aux) ) 
 Here is how much of TeX's memory you used:
  16291 strings out of 495061
  283679 string characters out of 1182620
@@ -819,23 +815,24 @@ Here is how much of TeX's memory you used:
  15420 words of font info for 52 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  56i,12n,55p,981b,1247s stack positions out of 5000i,500n,10000p,200000b,50000s
- </home/oem/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </home/oem
-/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0800.600pk></usr/share/texmf-texliv
-e/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/typ
-e1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/public/a
-msfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/c
-mcsc10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi9.pfb><
-/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/t
-exmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive
-/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1
-/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfo
-nts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.
-pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/s
-hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texmf-t
-exlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report_final.pdf (9 pages, 6586804 bytes).
+ </home/oem/.texmf-var/fon
+ts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </home/oem/.texmf-var/fonts/pk/ljfour/
+jknappen/ec/tcrm0800.600pk></usr/share/texmf-texlive/fonts/type1/public/amsfont
+s/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12
+.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/s
+hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texmf
+-texlive/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-texlive/fon
+ts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/pub
+lic/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
+/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb
+></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/
+texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-texliv
+e/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts/typ
+e1/public/amsfonts/cm/cmti9.pfb></usr/share/texmf-texlive/fonts/type1/public/am
+sfonts/cm/cmtt10.pfb>
+Output written on report_final.pdf (9 pages, 6588068 bytes).
 PDF statistics:
- 256 PDF objects out of 1000 (max. 8388607)
+ 257 PDF objects out of 1000 (max. 8388607)
  66 named destinations out of 1000 (max. 500000)
  110 words of extra memory for PDF output out of 10000 (max. 10000000)
 
