@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.5.13)  9 JUN 2014 21:15
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.5.13)  9 JUN 2014 21:29
 entering extended mode
 **report_final.tex
 
@@ -904,9 +904,6 @@ LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <9> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 188.
  [6]
 
-Package lastpage Warning: Rerun to get the references right on input line 261.
-
-
 AED: lastpage setting LastPage
 [7] [8 <C:/Users/Caren/Dropbox/PSU/ECE544/Projects/servo-and-protecto/doc/image
 s/scan_clear.png>]
@@ -917,18 +914,8 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 261.
 .aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 261.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 261.
-
-
-Package rerunfilecheck Warning: File `report_final.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `report_final.out':
-(rerunfilecheck)             Before: D4F7E325A1D6C41D8ABB333CA1EAB0EB;461
-(rerunfilecheck)             After:  FD17EC9032F8D23FF58441DB37A5BEC4;488.
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
+Package rerunfilecheck Info: File `report_final.out' has not changed.
+(rerunfilecheck)             Checksum: FD17EC9032F8D23FF58441DB37A5BEC4;488.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 261.
  ) 
 Here is how much of TeX's memory you used:
@@ -955,7 +942,7 @@ ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Progr
 am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program
  Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti9.pfb><C:/Program Fi
 les (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report_final.pdf (8 pages, 5386131 bytes).
+Output written on report_final.pdf (8 pages, 5385465 bytes).
 PDF statistics:
  247 PDF objects out of 1000 (max. 8388607)
  64 named destinations out of 1000 (max. 500000)
