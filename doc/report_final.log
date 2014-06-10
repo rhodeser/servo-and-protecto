@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.22)  9 JUN 2014 19:41
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.22)  9 JUN 2014 20:48
 entering extended mode
  %&-line parsing enabled.
 **report_final.tex
@@ -740,81 +740,85 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 File: images/bot_diagram.png Graphic file (type png)
 
 <use images/bot_diagram.png>
-Overfull \hbox (10.09628pt too wide) in paragraph at lines 82--95
+Overfull \hbox (10.09628pt too wide) in paragraph at lines 81--94
  [] 
  []
 
 [3 <./images/bot_diagram.png>]
+<images/main.png, id=92, 1134.2375pt x 1124.2pt>
+File: images/main.png Graphic file (type png)
+ <use images/main.png>
+<images/scan_clear.png, id=93, 1224.575pt x 1224.575pt>
+File: images/scan_clear.png Graphic file (type png)
+
+<use images/scan_clear.png>
+Overfull \hbox (2.87547pt too wide) in paragraph at lines 163--165
+\OT1/cmr/m/n/10.95 dis-tances is less than \OT1/cmtt/m/n/10.95 COLLISION[]DISTA
+NCE\OT1/cmr/m/n/10.95 , the \OT1/cmtt/m/n/10.95 clear \OT1/cmr/m/n/10.95 flag i
+s set to \OT1/cmr/m/it/10.95 FALSE \OT1/cmr/m/n/10.95 and \OT1/cmtt/m/n/10.95 E
+MERGENCY[]DISTANCE
+ []
+
+[4]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 138.
+nput line 173.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 138.
+(Font)              <7> on input line 173.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 138.
+(Font)              <5> on input line 173.
 
-Overfull \hbox (3.0pt too wide) in paragraph at lines 138--138
+Overfull \hbox (3.0pt too wide) in paragraph at lines 173--173
 [] [][][][][][] 
  []
 
 
-Overfull \hbox (3.0pt too wide) in paragraph at lines 138--138
+Overfull \hbox (3.0pt too wide) in paragraph at lines 173--173
 [] [][][][][][] 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 139.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 174.
 
 (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 139.
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 153.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 174.
+ [5 <./images/main.png>]
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 188.
 
 
 (/usr/share/texmf-texlive/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <9> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 153.
- [4]
-<images/main.png, id=129, 1134.2375pt x 1124.2pt>
-File: images/main.png Graphic file (type png)
- <use images/main.png>
-<images/scan_clear.png, id=130, 1224.575pt x 1224.575pt>
-File: images/scan_clear.png Graphic file (type png)
-
-<use images/scan_clear.png>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[5 <./images/main.png>] [6 <./images/scan_clear.png>] [7] [8]
-AED: lastpage setting LastPage (./report_final.aux) ) 
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 188.
+ [6] [7] [8 <./images/scan_clear.png>] AED: lastpage setting LastPage (./report
+_final.aux) ) 
 Here is how much of TeX's memory you used:
- 16281 strings out of 495061
- 283505 string characters out of 1182620
- 463746 words of memory out of 3000000
- 19065 multiletter control sequences out of 15000+50000
+ 16283 strings out of 495061
+ 283518 string characters out of 1182620
+ 465746 words of memory out of 3000000
+ 19066 multiletter control sequences out of 15000+50000
  15420 words of font info for 52 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 56i,12n,55p,1075b,1740s stack positions out of 5000i,500n,10000p,200000b,50000s
- </home/oem/.texmf-var/fon
-ts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </home/oem/.texmf-var/fonts/pk/ljfour/
-jknappen/ec/tcrm0800.600pk></usr/share/texmf-texlive/fonts/type1/public/amsfont
-s/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12
-.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/s
-hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texmf
--texlive/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-texlive/fon
-ts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/pub
-lic/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
-/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb
-></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/
-texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-texliv
-e/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts/typ
-e1/public/amsfonts/cm/cmti9.pfb></usr/share/texmf-texlive/fonts/type1/public/am
-sfonts/cm/cmtt10.pfb>
-Output written on report_final.pdf (8 pages, 5383252 bytes).
+ 56i,12n,55p,981b,1742s stack positions out of 5000i,500n,10000p,200000b,50000s
+ </home/oem/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk>
+ </home/oem/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0800.600pk></usr/share/t
+exmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texliv
+e/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/typ
+e1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/type1/public/am
+sfonts/cm/cmcsc10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/
+cmmi9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></
+usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/te
+xmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/
+fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/p
+ublic/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfont
+s/cm/cmsy9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.
+pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/sh
+are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on report_final.pdf (8 pages, 5385261 bytes).
 PDF statistics:
- 243 PDF objects out of 1000 (max. 8388607)
- 63 named destinations out of 1000 (max. 500000)
+ 247 PDF objects out of 1000 (max. 8388607)
+ 64 named destinations out of 1000 (max. 500000)
  105 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -61,11 +61,10 @@
 We created an autonomous robot car (SaMMY) that can successfully navigate its way through a given area without hitting any objects . It uses the popular \textbf{Arduino} platform and libraries along with a ultrasonic sensor for object detection. 
 
 %TODO 
-% Block diagram of arduino (mockup)
-% Other flowcharts, diagrams?
+% Me: Block diagram of arduino (mockup)
+% Caren or me: Other flowcharts, diagrams?
 
 \section{Hardware Components}
-%TODO References (oddwires)
 There are many different components needed to successfully and robustly create an autonomous robot.  The bulk of our design used a robot kit we ordered online (ref).  We also added various parts to make the production time more convenient, including switches, additional batteries, and various cables.  The important components can be seen in Figure \ref{diagram} and are described in Table \ref{components}.
 
 
@@ -120,8 +119,6 @@ The software portion was written in the \textbf{Arduino} IDE, and we modified so
 						&	Look Forward		&	Scans a 40\degree range in front while moving forward \\
 					&	Look Left/Right		&	Scans 90\degree left/right to determine next turn \\\hline
 
-
-		
 	\end{tabular}
 		\caption {Robot Functions} \label{functions}
 	\end{center}
@@ -131,9 +128,47 @@ The software portion was written in the \textbf{Arduino} IDE, and we modified so
 %scan fully left and right, get average
 %
 
-After initializing our components, the software ran an infinite loop which scans for objects and makes decisions on which direction to go.  The main control flow is seen in listing \ref{loop} below.
 
-\vspace{12pt}
+\subsection{Algorithm}
+
+	\begin{figure}[t]\centering
+	\includegraphics[height=0.85\textwidth]{images/main.png}
+	\caption{Main Loop Flowchart}
+		\label{main}
+	\end{figure}
+
+
+	\begin{figure}[b]\centering
+	\includegraphics[height=0.85\textwidth]{images/scan_clear.png}
+	\caption{scanClear() Flowchart}
+		\label{scan}
+	\end{figure}
+	
+\par\noindent
+%TODO Caren or me: change main diagram (distanceRight instead of distance_right)
+The primary purpose of our program is to ensure that SaMMY avoids all obstacles. Figure \ref{main} shows how our code is structured, and Listing \ref{loop} provides a code snippet from the main loop.
+Once the setup has run and the components have been initialized, the program enters the main section of our program and runs in an infinite loop which scans for objects and makes decisions on which direction to go. First, the \texttt{scanClear()} function is called, which checks for objects in front of the robot within a 40\degree \hspace{1pt} angle width. If this value is \emph{True}, the area is clear and the robot drives forward. Otherwise, it stops, calls \texttt{lookLeft()} and \texttt{lookRight()} and calculates the average distance to each side. If \texttt{distanceLeft} is greater than \texttt{distanceRight} and greater than \texttt{dangerThreshold}, the bot backs up and rotates left. Likewise, if \texttt{distanceRight} is greater than \texttt{distanceLeft} and greater than the \texttt{dangerThreshold}, the bot backs up and rotates right. Otherwise, it is blocked on both sides. At this point it backs up and makes a U-turn.
+
+
+To add some character to our robot, we added a counter that would launch SaMMY into a ``victory dance''.  We check this value before launching the \texttt{scanClear()} function.  If it's time to dance, then the \texttt{coolness()} function is called and SaMMY performs his victory dance.
+%\par\noindent
+
+Figure \ref{scan} shows a more detailed flowchart of the algorithm for \texttt{scanClear()}, which is called at the start of every loop.
+  
+%TODO Caren collision distance confusing - doesn't go anywhere in diagram when continue analysis happens.  
+% Why do we not return immediately when collision distance detected?
+% How do the flowcharts look?
+
+
+This function calls \texttt{lookForward()}, which returns 5 readings at 10\degree \hspace{1pt} increments. If any of these distances is less than \texttt{COLLISION\_DISTANCE}, the \texttt{clear} flag is set to \emph{FALSE} and \texttt{EMERGENCY\_DISTANCE} is checked. If the value is below the emergency distance, the program immediately returns \emph{FALSE} so that the appropriate action can be taken. Otherwise, the program function finishes its analysis and then returns the \texttt{clear} value.
+Provided the \texttt{clear} flag is \emph{TRUE}, the robot then checks for the average distance on the left and right. If exactly one side's distance is less than \texttt{AVOIDANCE\_DISTANCE} (the first and therefore farthest distance the bot checks) it veers the opposite way and continues driving forward. Once \texttt{scanClear()} has finished, it returns the \texttt{clear} value and the next actions are taken (Figure \ref{main}).
+
+%The look functions set up the angles and call the scan() function.
+%TODO Caren talk about look functions or ignore?
+The \texttt{scan()} function actually performs the scans at each angle by sending a sonar ``ping'' and waiting for the return signal to measure the distance. Sometimes the sonar returns very low, erroneous values that would cause the robot to halt. To avoid that, the \texttt{scan()} function only stops the bot and re-centers the sonar if two ping results in a row are below the emergency distance. 
+
+%TODO create "performance" or "results" section, or just lump it in with conclusion?
+
 
  \begin{lstlisting}[caption=Control Loop, label=loop]		
   void loop() {
@@ -177,41 +212,7 @@ After initializing our components, the software ran an infinite loop which scans
 
 
 
-\subsection{Algorithm}
-
-	\begin{figure}[h]\centering
-	\includegraphics[height=0.85\textwidth]{images/main.png}
-	\caption{Main Loop Flowchart}
-		\label{main}
-	\end{figure}
-
-
-	\begin{figure}[h]\centering
-	\includegraphics[height=0.85\textwidth]{images/scan_clear.png}
-	\caption{scanClear() Flowchart}
-		\label{scan}
-	\end{figure}
-	
-\par\noindent
-%TODO change main diagram (distanceRight instead of distance_right)
-The primary purpose of our program is to ensure that SaMMY avoids all obstacles. Figure \ref{main} shows how our code is structured, and Listing \ref{loop} provides a code snippet from the main loop.  Once our initial setup has run, the program enters the main section of our program, which loops infinitely. First, the \texttt{scanClear()} function is called, which checks for objects in front of the robot within a 40\degree \hspace{1pt} angle width. If this value is \emph{True}, the area is clear and the robot drives forward. Otherwise, it stops, calls \texttt{lookLeft()} and \texttt{lookRight()} and calculates the average distance to each side. If \texttt{distanceLeft} is greater than \texttt{distanceRight} and greater than \texttt{dangerThreshold}, the bot backs up and rotates left. Likewise, if \texttt{distanceRight} is greater than \texttt{distanceLeft} and greater than the \texttt{dangerThreshold}, the bot backs up and rotates right. Otherwise, it is blocked on both sides. At this point it backs up and makes a U-turn.
-
-
-To add some character to our robot, we added a counter that would launch SaMMY into a ``victory dance''.  We check this value before launching the \texttt{scanClear()} function.  If it's time to dance, then the \texttt{coolness()} function is called and SaMMY performs his victory dance.
-%\par\noindent
-
-Figure \ref{scan} shows a more detailed flowchart of the algorithm for \texttt{scanClear()}, which is called at the start of every loop.  
-%TODO collision distance confusing - doesn't go anywhere in diagram when continue analysis happens.  
-% Why do we not return immediately when collision distance detected?
-This function calls \texttt{lookForward()}, which returns 5 readings at 10\degree \hspace{1pt} increments. If any of these distances is less than \texttt{COLLISION\_DISTANCE}, the \texttt{clear} flag is set to \emph{FALSE} and \texttt{EMERGENCY\_DISTANCE} is checked. If the value is below the emergency distance, the program immediately returns \emph{FALSE} so that the appropriate action can be taken. Otherwise, the program function finishes its analysis and then returns the \texttt{clear} value.
-Provided the \texttt{clear} flag is \emph{TRUE}, the robot then checks for the average distance on the left and right. If exactly one side's distance is less than \texttt{AVOIDANCE\_DISTANCE} (the first and therefore farthest distance the bot checks) it veers the opposite way and continues driving forward. Once \texttt{scanClear()} has finished, it returns the \texttt{clear} value and the next actions are taken \ref{main}.
-
-
-%The look functions set up the angles and call the scan() function.
-%TODO talk about look functions?
-The \texttt{scan()} function actually performs the scans at each angle by sending a sonar ``ping'' and waiting for the return signal to measure the distance. Sometimes the sonar returns very low, erroneous values that would cause the robot to halt. To avoid that, the \texttt{scan()} function only stops the bot and re-centers the sonar if two ping results in a row are below the emergency distance. 
-
-%TODO create "performance" or "results" section, or just lump it in with conclusion?
+  
 
 \section{Conclusion}
 \texttt{Servo and Protecto} was quite fun for us to build and was certainly the biggest ``crowd pleaser'' out of all the projects we've made.  The assembly perhaps took the least amount of time, although we did face problems with a few of the parts not being built correctly (mainly the battery holder and motor plate mount).  Fixing the power problems was the most frustrating part of the project, but once we finished everything, the final product was quite rewarding.  We both spent equal times on all the different aspects of this project.  Currently, SaMMY performs quite well, even if he does run into walls occasionally.  This is caused by veering, which was a tough issue to fix. Listed below are some of the challenges we faced.
@@ -237,9 +238,26 @@ The Arduino platform and components in this project provide a large amount of fu
 
 \section{References}
 %TODO
-\textbf{Oddwires} Robot Kit:  \url{http://bit.ly/TysmCv}
-Arduino Libraries
-Pictures
+
+	\begin {table}[h!]
+	\begin {center} 
+	\vspace{15pt}
+	
+	\begin{tabular}{||c|c|l||}\hline	
+		\textbf{Source}	&	\textbf{Description}	&	\textbf{Link}		\\\hline
+		\multirow{3}{*}{Arduino Libraries}
+						&	Servo		&	\url{http://bit.ly/1nuXP2Y} 		\\
+						&	Sonar		&	\url{http://bit.ly/1pYs3OV} 		\\
+						&	Motor		&	\url{http://bit.ly/1pepI2n}	 	\\\hline
+		\multirow{2}{*}{Oddwires Robot Kit}
+						&	Kit Description		&	 \url{http://bit.ly/TysmCv} \\
+					&	Assembly Instructions		&	\url{http://bit.ly/1xASGf2} \\\hline
+
+	\end{tabular}
+		\caption {Robot Functions} \label{refs}
+	\end{center}
+	\end{table} 	
+
 \end{document}
 %references
 %-oddwires
