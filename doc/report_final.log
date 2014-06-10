@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.22)  9 JUN 2014 21:33
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.22)  9 JUN 2014 21:42
 entering extended mode
  %&-line parsing enabled.
 **report_final.tex
@@ -800,7 +800,7 @@ MERGENCY[]DISTANCE
 
 [6]
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 [7] [8 <./images/main.png>] [9 <./images/scan_clear.png>]
 AED: lastpage setting LastPage (./report_final.aux) ) 
@@ -827,7 +827,7 @@ texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-texliv
 e/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts/typ
 e1/public/amsfonts/cm/cmti9.pfb></usr/share/texmf-texlive/fonts/type1/public/am
 sfonts/cm/cmtt10.pfb>
-Output written on report_final.pdf (9 pages, 6586296 bytes).
+Output written on report_final.pdf (9 pages, 6586615 bytes).
 PDF statistics:
  256 PDF objects out of 1000 (max. 8388607)
  66 named destinations out of 1000 (max. 500000)
