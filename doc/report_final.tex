@@ -95,8 +95,13 @@ There are many different components needed to successfully and robustly create a
 	\end{center}
 	\end{table} 		
 	
-Assembling the kit took a fair amount of time.  We added a switch, soldered pins onto the motor shield for the sonar sensor, added the motor shield, changed the weight a few different times, and taped the battery holder to ensure the batteries wouldn't get displaced. 
+Assembling the kit took a fair amount of time.  We added a switch, soldered pins onto the motor shield for the sonar sensor, added the motor shield, changed the weight a few different times, and taped the battery holder to ensure the batteries wouldn't get displaced. Figure \ref{block} shows how each part was connected to the motor shield, which sits on top of the Arduino.
 
+	\begin{figure}[h]\centering
+	\includegraphics[height=0.85\textwidth]{images/block_diagram.png}
+	\caption{Block Diagram of Design}
+		\label{block}
+	\end{figure}
 
 \section{Robot Control}
 
@@ -131,7 +136,7 @@ The software portion was written in the \textbf{Arduino} IDE, and we modified so
 
 \subsection{Algorithm}
 
-	\begin{figure}[t]\centering
+	\begin{figure}[b]\centering
 	\includegraphics[height=0.85\textwidth]{images/main.png}
 	\caption{Main Loop Flowchart}
 		\label{main}
@@ -146,29 +151,8 @@ The software portion was written in the \textbf{Arduino} IDE, and we modified so
 	
 \par\noindent
 %TODO Caren or me: change main diagram (distanceRight instead of distance_right)
-The primary purpose of our program is to ensure that SaMMY avoids all obstacles. Figure \ref{main} shows how our code is structured, and Listing \ref{loop} provides a code snippet from the main loop.
-Once the setup has run and the components have been initialized, the program enters the main section of our program and runs in an infinite loop which scans for objects and makes decisions on which direction to go. First, the \texttt{scanClear()} function is called, which checks for objects in front of the robot within a 40\degree \hspace{1pt} angle width. If this value is \emph{True}, the area is clear and the robot drives forward. Otherwise, it stops, calls \texttt{lookLeft()} and \texttt{lookRight()} and calculates the average distance to each side. If \texttt{distanceLeft} is greater than \texttt{distanceRight} and greater than \texttt{dangerThreshold}, the bot backs up and rotates left. Likewise, if \texttt{distanceRight} is greater than \texttt{distanceLeft} and greater than the \texttt{dangerThreshold}, the bot backs up and rotates right. Otherwise, it is blocked on both sides. At this point it backs up and makes a U-turn.
 
-
-To add some character to our robot, we added a counter that would launch SaMMY into a ``victory dance''.  We check this value before launching the \texttt{scanClear()} function.  If it's time to dance, then the \texttt{coolness()} function is called and SaMMY performs his victory dance.
-%\par\noindent
-
-Figure \ref{scan} shows a more detailed flowchart of the algorithm for \texttt{scanClear()}, which is called at the start of every loop.
-  
-%TODO Caren collision distance confusing - doesn't go anywhere in diagram when continue analysis happens.  
-% Why do we not return immediately when collision distance detected?
-% How do the flowcharts look?
-
-
-This function calls \texttt{lookForward()}, which returns 5 readings at 10\degree \hspace{1pt} increments. If any of these distances is less than \texttt{COLLISION\_DISTANCE}, the \texttt{clear} flag is set to \emph{FALSE} and \texttt{EMERGENCY\_DISTANCE} is checked. If the value is below the emergency distance, the program immediately returns \emph{FALSE} so that the appropriate action can be taken. Otherwise, the program function finishes its analysis and then returns the \texttt{clear} value.
-Provided the \texttt{clear} flag is \emph{TRUE}, the robot then checks for the average distance on the left and right. If exactly one side's distance is less than \texttt{AVOIDANCE\_DISTANCE} (the first and therefore farthest distance the bot checks) it veers the opposite way and continues driving forward. Once \texttt{scanClear()} has finished, it returns the \texttt{clear} value and the next actions are taken (Figure \ref{main}).
-
-%The look functions set up the angles and call the scan() function.
-%TODO Caren talk about look functions or ignore?
-The \texttt{scan()} function actually performs the scans at each angle by sending a sonar ``ping'' and waiting for the return signal to measure the distance. Sometimes the sonar returns very low, erroneous values that would cause the robot to halt. To avoid that, the \texttt{scan()} function only stops the bot and re-centers the sonar if two ping results in a row are below the emergency distance. 
-
-%TODO create "performance" or "results" section, or just lump it in with conclusion?
-
+\newpage
 
  \begin{lstlisting}[caption=Control Loop, label=loop]		
   void loop() {
@@ -209,6 +193,32 @@ The \texttt{scan()} function actually performs the scans at each angle by sendin
   }  
   }
   \end{lstlisting}
+
+
+
+The primary purpose of our program is to ensure that SaMMY avoids all obstacles. Figure \ref{main} shows how our code is structured, and Listing \ref{loop} provides a code snippet from the main loop.
+Once the setup has run and the components have been initialized, the program enters the main section of our program and runs in an infinite loop which scans for objects and makes decisions on which direction to go. First, the \texttt{scanClear()} function is called, which checks for objects in front of the robot within a 40\degree \hspace{1pt} angle width. If this value is \emph{True}, the area is clear and the robot drives forward. Otherwise, it stops, calls \texttt{lookLeft()} and \texttt{lookRight()} and calculates the average distance to each side. If \texttt{distanceLeft} is greater than \texttt{distanceRight} and greater than \texttt{dangerThreshold}, the bot backs up and rotates left. Likewise, if \texttt{distanceRight} is greater than \texttt{distanceLeft} and greater than the \texttt{dangerThreshold}, the bot backs up and rotates right. Otherwise, it is blocked on both sides. At this point it backs up and makes a U-turn.
+
+
+To add some character to our robot, we added a counter that would launch SaMMY into a ``victory dance''.  We check this value before launching the \texttt{scanClear()} function.  If it's time to dance, then the \texttt{coolness()} function is called and SaMMY performs his victory dance.
+%\par\noindent
+
+Figure \ref{scan} shows a more detailed flowchart of the algorithm for \texttt{scanClear()}, which is called at the start of every loop.
+  
+%TODO Caren collision distance confusing - doesn't go anywhere in diagram when continue analysis happens.  
+% Why do we not return immediately when collision distance detected?
+
+
+
+This function calls \texttt{lookForward()}, which returns 5 readings at 10\degree \hspace{1pt} increments. If any of these distances is less than \texttt{COLLISION\_DISTANCE}, the \texttt{clear} flag is set to \emph{FALSE} and \texttt{EMERGENCY\_DISTANCE} is checked. If the value is below the emergency distance, the program immediately returns \emph{FALSE} so that the appropriate action can be taken. Otherwise, the program function finishes its analysis and then returns the \texttt{clear} value.
+Provided the \texttt{clear} flag is \emph{TRUE}, the robot then checks for the average distance on the left and right. If exactly one side's distance is less than \texttt{AVOIDANCE\_DISTANCE} (the first and therefore farthest distance the bot checks) it veers the opposite way and continues driving forward. Once \texttt{scanClear()} has finished, it returns the \texttt{clear} value and the next actions are taken (Figure \ref{main}).
+
+%The look functions set up the angles and call the scan() function.
+%TODO Caren talk about look functions or ignore?
+The \texttt{scan()} function actually performs the scans at each angle by sending a sonar ``ping'' and waiting for the return signal to measure the distance. Sometimes the sonar returns very low, erroneous values that would cause the robot to halt. To avoid that, the \texttt{scan()} function only stops the bot and re-centers the sonar if two ping results in a row are below the emergency distance. 
+
+%TODO create "performance" or "results" section, or just lump it in with conclusion?
+
 
 
 
