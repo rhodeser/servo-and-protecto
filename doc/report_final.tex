@@ -61,9 +61,8 @@
 We created an autonomous robot car (SaMMY) that can successfully navigate its way through a given area without hitting any objects . It uses the popular \textbf{Arduino} platform and libraries along with a ultrasonic sensor for object detection. 
 
 %TODO 
-% Block diagram of arduino
-% Other flowcharts?
-% Explain algorithms
+% Block diagram of arduino (mockup)
+% Other flowcharts, diagrams?
 
 \section{Hardware Components}
 %TODO References (oddwires)
@@ -138,10 +137,7 @@ After initializing our components, the software ran an infinite loop which scans
 
  \begin{lstlisting}[caption=Control Loop, label=loop]		
   void loop() {
-    if (scanClear())  // If clear to go forward
-    {
-      drive_forward();
-    }
+    if (scanClear())  drive_forward(); 
     else              // if path is blocked
     {
       freewheel();    // stop
@@ -151,7 +147,6 @@ After initializing our components, the software ran an infinite loop which scans
       lookRight();
       int distanceRight = getAverageDistance();
       
-      // re-center the ultrasonic
       servo_position(CENTER);
 
       // go the least obstructed way
@@ -180,14 +175,9 @@ After initializing our components, the software ran an infinite loop which scans
   }
   \end{lstlisting}
 
-%TODO flow diagrams, mockups of components, block diagram (edit battery holder)
+
 
 \subsection{Algorithm}
-
-%Talk about the specific algorithms, referring to the figures.
-%Mention victory dance
-%TODO Do we need this since the code above explains this? -- YES because this is the way Roy wants reports .. trust me
-%TODO Mention intervals of 10 degrees and how they are averaged
 
 	\begin{figure}[h]\centering
 	\includegraphics[height=0.85\textwidth]{images/main.png}
@@ -198,31 +188,30 @@ After initializing our components, the software ran an infinite loop which scans
 
 	\begin{figure}[h]\centering
 	\includegraphics[height=0.85\textwidth]{images/scan_clear.png}
-	\caption{Scan Flowchart}
+	\caption{scanClear() Flowchart}
 		\label{scan}
 	\end{figure}
+	
 \par\noindent
-This program controls the servo and protecto robot car. The bot has one important task ``avoid obstacles''. The main function ``loop'' is called after the setup is done. In that function, there is a counter that will tell the bot when to do its ``victory dance''. If it is not the time for dancing, the scanClear() function is called. If the return value is TRUE (i.e. clear), the bot drives forward. Otherwise, it stops then calls ``lookLeft()'' and ``lookRight()'' and gets the average distances to its left and right. If the distanceLeft is greater than the distanceRight and greater than the ``dangerThreshold'' then the bot backs up and rotates left. Else if the distanceRight is greater than the distanceLeft and greater than the ``dangerThreshold'' then the bot backs up and rotates right. Otherwise, it is blocked on both sides. Therefore, it backs up and makes a u-turn.
-\par\noindent
-However, if it is the time to dance, then the ``coolness()'' function is called and the bot performs its victory dance.
-\par\noindent
-The scanClear() function calls the lookForward() function and analyzes the data that is returned by it. It goes through all the readings and checks if any of the distances returned is below the COLLISION\_DISTANCE. If it is, then it sets the clear flag to FALSE and continues the analysis.
-\par\noindent
-However, if a distance is below the COLLISION\_DISTANCE and below the EMERGENCY\_DISTANCE then it directly returns FALSE and exits the function so that the correct reaction takes place. Otherwise, it finishes the analysis and sets the clear flag to TRUE. Then, it checks the average distance on the left and right of the data gathered by looking forward.
-\par\noindent
-If the leftDistance is less than the AVOIDANCE\_DISTANCE and the rightDistance is greater than the AVOIDANCE\_DISTANCE, then the bot veers right.
-Else if the rightDistance is less than the AVOIDANCE\_DISTANCE and the leftDistance is greater than the AVOIDANCE\_DISTANCE, then the bot veers left.
-\par\noindent
-The look functions set up the angles and call the scan() function.
-\par\noindent
-The scan() function actually performs the scans at each angle by sending a sonar "ping" and waiting for the return signal to measure the distance. Sometime the sonar returns very low values that are not correct which would make the bot stop even if there is no obstacle. To avoid that, in the scan function, if the returned distance is below the EMERGENCY\_DISTANCE then the bot sends another ping. If that newly measured distance is still below the EMERGENCY\_DISTANCE, then it re-centers the sonar and stops scanning so that the necessary reaction takes place as soon as possible.
-\par\noindent
-Acknowledgement: this algorithm is based on the functions and sample sketch provided by oddWires with the purchase of the oddWires Arduino Kit.
-                 We used the idea behind the code but we repurposed the functions and used our own algorithms which basically made the bot behave 
-                 better in emergency situations and avoid obstacles in a smoother way. 
+%TODO change main diagram (distanceRight instead of distance_right)
+The primary purpose of our program is to ensure that SaMMY avoids all obstacles. Figure \ref{main} shows how our code is structured, and Listing \ref{loop} provides a code snippet from the main loop.  Once our initial setup has run, the program enters the main section of our program, which loops infinitely. First, the \texttt{scanClear()} function is called, which checks for objects in front of the robot within a 40\degree \hspace{1pt} angle width. If this value is \emph{True}, the area is clear and the robot drives forward. Otherwise, it stops, calls \texttt{lookLeft()} and \texttt{lookRight()} and calculates the average distance to each side. If \texttt{distanceLeft} is greater than \texttt{distanceRight} and greater than \texttt{dangerThreshold}, the bot backs up and rotates left. Likewise, if \texttt{distanceRight} is greater than \texttt{distanceLeft} and greater than the \texttt{dangerThreshold}, the bot backs up and rotates right. Otherwise, it is blocked on both sides. At this point it backs up and makes a U-turn.
 
 
+To add some character to our robot, we added a counter that would launch SaMMY into a ``victory dance''.  We check this value before launching the \texttt{scanClear()} function.  If it's time to dance, then the \texttt{coolness()} function is called and SaMMY performs his victory dance.
+%\par\noindent
 
+Figure \ref{scan} shows a more detailed flowchart of the algorithm for \texttt{scanClear()}, which is called at the start of every loop.  
+%TODO collision distance confusing - doesn't go anywhere in diagram when continue analysis happens.  
+% Why do we not return immediately when collision distance detected?
+This function calls \texttt{lookForward()}, which returns 5 readings at 10\degree \hspace{1pt} increments. If any of these distances is less than \texttt{COLLISION\_DISTANCE}, the \texttt{clear} flag is set to \emph{FALSE} and \texttt{EMERGENCY\_DISTANCE} is checked. If the value is below the emergency distance, the program immediately returns \emph{FALSE} so that the appropriate action can be taken. Otherwise, the program function finishes its analysis and then returns the \texttt{clear} value.
+Provided the \texttt{clear} flag is \emph{TRUE}, the robot then checks for the average distance on the left and right. If exactly one side's distance is less than \texttt{AVOIDANCE\_DISTANCE} (the first and therefore farthest distance the bot checks) it veers the opposite way and continues driving forward. Once \texttt{scanClear()} has finished, it returns the \texttt{clear} value and the next actions are taken \ref{main}.
+
+
+%The look functions set up the angles and call the scan() function.
+%TODO talk about look functions?
+The \texttt{scan()} function actually performs the scans at each angle by sending a sonar ``ping'' and waiting for the return signal to measure the distance. Sometimes the sonar returns very low, erroneous values that would cause the robot to halt. To avoid that, the \texttt{scan()} function only stops the bot and re-centers the sonar if two ping results in a row are below the emergency distance. 
+
+%TODO create "performance" or "results" section, or just lump it in with conclusion?
 
 \section{Conclusion}
 \texttt{Servo and Protecto} was quite fun for us to build and was certainly the biggest ``crowd pleaser'' out of all the projects we've made.  The assembly perhaps took the least amount of time, although we did face problems with a few of the parts not being built correctly (mainly the battery holder and motor plate mount).  Fixing the power problems was the most frustrating part of the project, but once we finished everything, the final product was quite rewarding.  We both spent equal times on all the different aspects of this project.  Currently, SaMMY performs quite well, even if he does run into walls occasionally.  This is caused by veering, which was a tough issue to fix. Listed below are some of the challenges we faced.
@@ -233,7 +222,7 @@ Acknowledgement: this algorithm is based on the functions and sample sketch prov
 		\item \textbf{Power Issues}: After the initial assembly, we were not able to properly move the servo and control the motors.  Our initial thought was inadequate power, but the correspondent we communicated with ensured us that it could run perfectly fine on 6V of AA batteries.  Even after upping the voltage we saw problems, which were due to the power demands of our servo.  After increasing the power to 9V of AA batteries the problem diminished.
 		\item \textbf{Motor control}: The motors we received are not precise enough to deliver equal power on both sides.  This caused inevitable veering of the robot.  We were able to use our own veering function to correct a lot of this, but were not able to control the bot perfectly.
 		\item \textbf{CMUcam}: We were able to calibrate and test the CMUcam, which was intended for color detection.  However, communicating the frames from the camera to the Arduino proved difficult.  Even the example code would not work on our device. We were not able to solve the communication error before the project was due.
-		\item \textbf{Erroneous Sonar Readings}: Occasionally the ultrasonic sensor picked up erroneous values that would usually be below 10cm (possibly due to ghost echoes).  This cause the robot to stop immediately.  We adjusted this by filtering out the first ping that it received below 10cm.
+		\item \textbf{Erroneous Sonar Readings}: Occasionally the ultrasonic sensor picked up incorrect values distance values that would immediately cause our bot to stop (possibly due to ghost echoes).  We adjusted this by waiting until it received two pings below 10cm.
 		\end{itemize}
 
 \subsection{Future Additions}
@@ -255,3 +244,6 @@ Pictures
 %references
 %-oddwires
 %-arduino
+%Acknowledgement: this algorithm is based on the functions and sample sketch provided by oddWires with the purchase of the oddWires Arduino Kit.
+%                 We used the idea behind the code but we repurposed the functions and used our own algorithms which basically made the bot behave 
+%                 better in emergency situations and avoid obstacles in a smoother way. 
